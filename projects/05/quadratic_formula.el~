@@ -1,0 +1,17 @@
+;;quadratic_formula.el computes a quadratic roots given coefficents
+;;
+;;by: Bryce Allen
+;;3/5/17
+;;cs 214
+;;Calvin College
+;;;;;;;;;;;;;;;;
+
+(defun quadraticFormula(a b c)
+  (setq var1(sqrt ((-(** b 2) (* (* 4 a) c)))))
+  (setf myArray (make-array '(2)))
+  (setq (aref myArray 0)((/ (-(* -1 b) (var1)) (* 2 a))))
+  (setq (aref myArray 0)((/ (+(* -1 b) (var1)) (* 2 a))))
+  (if (= a 0) (0)
+    (else (if (>= (-(** b 2) (* (* 4 a) c)) 0) (myArray)
+	    (else (0))))))
+  

@@ -1,0 +1,15 @@
+procedure Compute_Factorial is
+   function ComputeFactorial(N: in Float) return Float is
+   begin
+      Answer:= 1.0;
+      for i in range(2..N)
+      loop
+	 Answer:= i*Answer;
+      end
+   end
+   
+   
+begin
+      
+end
+      

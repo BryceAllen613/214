@@ -1,0 +1,94 @@
+Script started on Wed 07 Feb 2018 03:58:46 PM EST
+bda5@boole:~/214/labs/02$ cat example7 6.lex
+%{
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "example6.tab.h"
+%}
+%%
+[0-9]+                  yylval = atoi(yytext); return NUMBER;
+heat                    return TOKHEAT;
+on|off                  yylval = !strcmp(yytext,"on"); return STATE;
+set                     return TOKSET;
+temperature             return TOKTEMPERATURE;
+humidity		return TOKHUMIDITY;
+\n                      /* ignore end of line */;
+[ \t]+                  /* ignore whitespace */;
+%%bda5@boole:~/214/labs/02$ cat example6.y
+%{
+#include <stdio.h>
+#include <string.h>
+
+/* declarations */
+int yylex (void);
+void yyerror (char const *);
+int yyparse(void);
+
+/* definitions */ 
+void yyerror(const char *str) {
+        fprintf(stderr,"error: %s\n",str);
+}
+ 
+int yywrap() {
+        return 1;
+} 
+ 
+int main() {
+        yyparse();
+} 
+
+%}
+
+%token NUMBER TOKHEAT STATE TOKSET TOKTEMPERATURE TOKHUMIDITY
+%%
+
+commands: /* empty */
+        | commands command
+        ;
+
+command:
+        heat_switch
+        | temperature_set
+	| humidity_set
+        ;
+
+heat_switch:
+        TOKHEAT STATE
+        {
+		if ($2) {  /* if STATE == 1 */
+                        printf("\tHeat turned on\n");
+                } else {
+                        printf("\tHeat turned off\n");
+                }
+        }
+        ;
+
+temperature_set:
+        TOKSET TOKTEMPERATURE NUMBER
+        {
+                printf("\tTemperature set\n");
+        }
+        ;
+humidity_set:
+	TOKSET TOKHUMIDITY NUMBER
+	{
+		printf("\tHumidity set to %d\n",$3);
+	}
+	;bda5@boole:~/214/labs/02$ flex example6.lex
+bda5@boole:~/214/labs/02$ fl  bison -d example6.y
+bda5@boole:~/214/labs/02$ gcc lex.yy.c example6.tab.c -o example6
+bda5@boole:~/214/labs/02$ ./example6
+heat on
+	Heat turned on
+heat off
+	Heat turned off
+heat on
+	Heat turned on
+t set temperature 45
+	Temperature set
+set humidity 50
+	Humidity set to 50
+bda5@boole:~/214/labs/02$ exit
+
+Script done on Wed 07 Feb 2018 04:01:16 PM EST

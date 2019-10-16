@@ -1,0 +1,35 @@
+
+with Ada.Text_IO; use Ada.Text_IO;
+package Temperature_Package is
+   type Temperature is private;
+   
+   procedure Init(T : out Temperature; D : in Float; S : in String);
+   
+   function GetDegrees(T : in Temperature) return Float;
+   
+   function GetScale(T : in Temperature) return String;--(1.. 1);
+   
+   procedure GetCelsius(T : out Temperature);-- return Float;
+      
+   procedure GetKelvin(T : out Temperature);-- return Float;
+   
+   procedure GetFahrenheit(T : out Temperature);-- return Float;
+
+   procedure InputTemp(T : out Temperature; D : in Float; S : in String);
+   
+   procedure PrintTemp(T : in Temperature);-- return String;--(1.. 8);
+   
+   procedure RaiseTemp(T : out Temperature; D : in Float);
+   
+   procedure LowerTemp(T : out Temperature; D : in Float);
+   
+   function Equals(T : in Temperature; T2 : in Temperature) return Boolean;
+   
+   function LessThan(T : in Temperature; T2 : in Temperature) return Boolean;
+private
+   type Temperature is
+      record
+	 Degrees : Float;
+	 Scale : String(1.. 1);
+      end record;
+end Temperature_Package;

@@ -1,0 +1,82 @@
+;; Temperature.el tests temperature type
+;; Bryce Allen
+;; Calvin College
+;; CS 214
+;; 4/10/18
+
+;; Temperature constructs a temperature from two variables, a real and string
+;; receive: degrees and scale
+;; return a list representing the type with degrees and scale
+(defun Temperature(degrees scale)
+  (list degrees scale))
+
+;; getDegrees returns degrees of this temperature
+;; receive theTemp, the temperature we will get degrees
+;; return degrees
+(defun getDegrees(theTemp)
+  (car theTemp))
+
+;; getScale returns scale of this temperature
+;; receive theTemp, the temperature we will get scale
+;; return the scale
+(defun getScale(theTemp)
+  (car (cdr theTemp)))
+
+;; returns a list with new Fahrenheit conversion
+;; receive theTemp, the temperature to be converted to fahrenheit
+;; return a list representing the new temperature
+(defun getFahrenheit(theTemp)
+  (if (= (getScale theTemp) "F") (setq d (getDegrees theTemp)))
+  (if (= (getScale theTemp) "C") (setq d (+ ( * (getDegrees theTemp) (/ 9 5)) 32)))
+  (if (= (getScale theTemp) "K") (setq d (+ (* (- (getDegrees theTemp) 273.15) (/ 9 5)) 32)))
+  (Temperature d "F"))
+
+;; returns a list with new Celsius conversion
+;; receive theTemp, the temperature to be converted to celsius
+;; return a list representing the new temperature
+(defun getCelsius(theTemp)
+  (if (= (getScale theTemp) "C") (setq d (getDegrees theTemp)))
+  (if (= (getScale theTemp) "F") (setq d (* (-(getDegrees theTemp) 32) (/ 5 9))))
+  (if (= (getScale theTemp) "K") (setq d (- (getDegrees theTemp) 273.15)))
+    (Temperature d "C"))
+
+;; returns a list with new Kelvin conversion
+;; receive theTemp, the temperature to be converted to kelvin
+;; return a list representing the new temperature
+(defun getKelvin(theTemp)
+  (if (= (getScale theTemp) "K") (setq d (getDegrees theTemp)))
+  (if (= (getScale theTemp) "C") (setq d (+ (getDegrees theTemp) 273.15)))
+  (if (= (getScale theTemp) "F") (setq d (+ (* (- (getDegrees theTemp) 32) (/ 5 9)) 273.15)))
+    (Temperature d "K"))
+
+(defun printTemp(theTemp)
+  (message "%f %d" (getDegrees theTemp) (getScale theTemp)))
+
+;; raises the temperature by degrees amount
+;; receive theTemp, degrees, the temperature to be raised and the amount to raise by.
+;; return a list representing the new temperature.
+(defun raise(theTemp degrees)
+  (Temperature (+ (getDegrees theTemp) degrees) (getScale theTemp)))
+
+;; lowers the temperature by degrees amount
+;; receive theTemp, degrees, the temperature to be lowered and the amount to lower by.
+;; return a list representing the new temperature.
+(defun lower(theTemp degrees)
+  (Temperature (- (getDegrees theTemp) degrees) (getScale theTemp)))
+
+;; tests if the two temps are equal
+;; receive leftTemp and rightTemp, the two operands.
+;; return true if equal, false otherwise
+(defun equal(leftTemp rightTemp)
+  (= (getDegrees leftTemp) (getDegrees rightTemp)))
+
+;; tests if the two temps are less than eqchother
+;; receive leftTemp and rightTemp, the two operands.
+;; return true if leftTemp is less than rightTemp, false otherwise
+(defun lessThan(leftTemp rightTemp)
+  (< (getDegrees leftTemp) (getDegrees rightTemp)))
+
+(byte-compile-file "Temperature.el")
+
+
+

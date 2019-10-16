@@ -1,0 +1,19 @@
+# quadratic_formula.rb computes quadratic formula given a b c values
+#
+# 3/5/18
+# Bryce Allen
+# cs 214
+# Calvin College
+
+root1 = 0.0
+root2 = 0.0
+def quadraticFormula(a b c)
+  if a == 0
+    print "invalid input"
+  elsif ((b ** 2) - (4*a*c)) < 0
+    print "invalid input"
+  else
+    root1 = ((-b + sqrt(((b ** 2) - (4*a*c))))/(2*a))
+    root2 = ((-b - sqrt(((b ** 2) - (4*a*c))))/(2*a))
+  end
+end

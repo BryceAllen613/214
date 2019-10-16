@@ -1,0 +1,4 @@
+
+(defun computeFactorial (n)
+  (if(> n 1)
+    (* n (computeFactorial (- n 1)))))

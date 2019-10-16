@@ -1,0 +1,210 @@
+Script started on Mon 26 Mar 2018 09:34:31 PM EDT
+^[[A^[[Abda5@kay:~/214/projects/06$ a2ps lab06-resultsls[K[16@a2ps lab06-results[Ka2ps lab06-results[Kjavac -deprecation ArrayProcessing.java
+bda5@kay:~/214/projects/06$ java a ArrayProcessing.java     
+Enter number of values for the array: 
+5
+Enter the values: 
+1.0
+2.0
+3.0
+4.0
+5.0
+ 1.0  2.0  3.0  4.0  5.0 bda5@kay:~/214/projects/06$ cat ArrayProcessgin   ing.java
+/* ArrayProcessing.java prints an array and fills an array from user input
+ * by: Bryce Allen
+ * cs 214 
+ * Calvin College
+ * 3/26/18
+ */
+
+import java.util.Scanner;
+
+
+public class ArrayProcessing {
+    public static void main(String[] args)
+    {
+	Scanner keyboard = new Scanner(System.in);
+	System.out.println("Enter number of values for the array: ");
+	int size = keyboard.nextInt();
+	double[] list = new double[size];
+	System.out.println("Enter the values: ");
+	enterValues(list);//enter value subprogram
+	printValues(list);//print value subprogram
+    }
+
+    public static void enterValues(double[] anArray)
+    {
+	Scanner scan = new Scanner(System.in);
+	for(int i = 0; i < anArray.length; i++)
+	    {
+		anArray[i] = scan.nextDouble();
+	    }
+    }
+
+    public static void printValues(double[] anArray)
+    {
+	for(int i = 0; i < anArray.length; i++)
+	    {
+		System.out.print(" " + anArray[i] + " ");
+	    }
+    }
+}
+bda5@kay:~/214/projects/06$ exit
+
+Script done on Mon 26 Mar 2018 09:35:37 PM EDT
+Script started on Tue 27 Mar 2018 04:32:17 PM EDT
+bda5@knuth:~/214/projects/06$ script script.Java[21@javac -deprecation ArrayProcessing.java[19P ArrayProcessingc -deprecation ArrayProcessing.java[19P ArrayProcessingc -deprecation ArrayProcessing.javabda5@knuth:~/214/projects/06$ [21Pscript script.Java[Kscript script.Java[Kgnatmake arrayprocessing.adb
+gcc-5 -c arrayprocessing.adb
+gnatbind-5 -x arrayprocessing.ali
+gnatlink-5 arrayprocessing.ali
+bda5@knuth:~/214/projects/06$ ./arrayprocessing
+enter a size: 4
+Enter values for the array: 1.0
+2.0
+3.0
+4.0
+values are:  1.00000E+00 2.00000E+00 3.00000E+00 4.00000E+00
+bda5@knuth:~/214/projects/06$ cat arrayprocessing.adb
+-- arrayprocessing.adb processes (reads and writes) values to an array.
+-- By: Bryce Allen
+-- cs 214
+-- Calvin College
+-- 3/27/18
+-------------------------------------------------------------------------
+with Ada.Text_IO; use Ada.Text_IO;             -- Put(String)
+with Ada.Float_Text_IO; use Ada.Float_Text_IO; -- Put(Float)
+with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
+
+procedure ArrayProcessing is
+   
+   type ArrayType is array(Integer range <>) of Float;
+   type ArrayTypeAccess is access ArrayType;
+   
+   AnArray : ArrayTypeAccess;-- := (0.0,0.0);
+   Size : Integer;
+   
+   procedure WriteValues is
+   begin
+      Put("Enter values for the array: ");
+      for I in AnArray'Range
+      loop
+	 Get(AnArray(I));
+      end loop;
+   end WriteValues;
+   
+   procedure ReadValues is
+   begin
+      Put("values are: ");
+      for I in AnArray'Range
+      loop
+	 Put(AnArray(I));
+      end loop;
+   end ReadValues;
+   
+begin
+   Put("enter a size: ");
+   Get(Size);
+   AnArray := new ArrayType(1..Size);
+   WriteValues;
+   ReadValues;
+end ArrayProcessing;
+bda5@knuth:~/214/projects/06$ exit
+
+Script done on Tue 27 Mar 2018 04:33:09 PM EDT
+;;array_processing.el processes an array (prints all elements)
+;;by: Bryce Allen
+;;cs-214 @ Calvin College
+;;3/26/18
+
+
+(defun printArray (anArray itsSize)
+  (if (vectorp anArray)
+      (if (<= itsSize 0)
+          0.0
+        (message " %f " (aref anArray (- itsSize 1)))
+	(printArray anArray (- itsSize 1))))
+  nil)
+
+printArray
+
+(printArray [9.0 8.0 7.0] 0.0)
+
+nil
+
+
+(defun main (arr)
+  (message "Here is the contents of the array: ")
+  (printArray arr (length arr)))
+  
+main
+
+(main [9.0 8.0 7.0])
+
+nil
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Script started on Tue 27 Mar 2018 05:05:05 PM EDT
+bda5@knuth:~/214/projects/06$ ruby s array_processing.rb
+Enter number of values for the array: 
+5
+Enter the values: 
+1.0
+2.0
+3.0
+4.0
+5.0
+values are: 
+1.0
+2.0
+3.0
+4.0
+5.0
+bda5@knuth:~/214/projects/06$ cat array_processing.rb
+## array_processing.rb processes (reads and write values) to an array.
+## By: Bryce Allen
+## cs 214
+## Calvin College
+## 3/27/18
+##########################################################################
+
+def writeValues(anArray)
+  for i in 0...anArray.size
+      anArray[i] = gets.chomp.to_f
+    end
+end
+
+def readValues(anArray)
+  for i in 0...anArray.size
+    puts anArray[i]
+  end
+end
+
+  
+def main
+  puts "Enter number of values for the array: "
+  size = gets.chomp.to_f
+  arr = Array.new(size)
+  puts "Enter the values: "
+  writeValues(arr);
+  puts "values are: "
+  readValues(arr);
+end
+
+main
+bda5@knuth:~/214/projects/06$ exit
+
+Script done on Tue 27 Mar 2018 05:05:46 PM EDT

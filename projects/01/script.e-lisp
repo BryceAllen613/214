@@ -1,0 +1,32 @@
+
+;;; rectangle_area.el computes the area of a circle. 
+;;;                                                                     
+;;; Input: The length and width of the rectangle.                                  
+;;; Precondition: The lenght/width  is a positive number.                      
+;;; Output:the area of the rectangle.                                 
+;;; 
+;;; Completed by:Bryce Allen
+;;; Date: February, 5, 2018
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                   
+
+;;; function rectangleArea computes area of rectangle
+;;; input: length, width
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                  
+(defun rectangleArea (length width)
+  "Compute the area of a rectangle, passed length and width."            
+  (* length width))      
+rectangleArea
+(rectangleArea 5 10)
+50
+
+
+(defun rectangle_area(l w)
+  "Compute the area of a rectangle given length and width."
+  (interactive "nEnter the rectangle's length: ")
+  (interactive "nEnter the rectangle's width: ")
+  (setq area (rectangleArea l w))      
+  (message "The rectangle's area is %f." area))
+
+rectangle_area
+(rectangle_area 5 10)
+"The rectangle's area is 50.000000."

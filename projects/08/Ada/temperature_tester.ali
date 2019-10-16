@@ -1,0 +1,60 @@
+V "GNAT Lib v5"
+M P W=b
+A -mtune=generic
+A -march=x86-64
+P ZX
+
+RN
+RV NO_FLOATING_POINT
+RV NO_IO
+RV SPARK_05
+
+U temperature_tester%b	temperature_tester.adb	78792813 NE OO SU
+W ada%s			ada.ads			ada.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W temperature_package%s	temperature_package.adb	temperature_package.ali
+
+D ada.ads		20070406091342 3ffc8e18 ada%s
+D a-except.ads		20140730140058 5250cb69 ada.exceptions%s
+D a-ioexce.ads		20140225151544 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20141120112812 119b8fb3 ada.streams%s
+D a-tags.ads		20140730140058 dc4d0634 ada.tags%s
+D a-textio.ads		20140717063745 386df5d4 ada.text_io%s
+D a-unccon.ads		20070406091342 f9eb8f06 ada.unchecked_conversion%s
+D interfac.ads		20141120112812 6033a23f interfaces%s
+D i-cstrea.ads		20140801100435 e53d8b8e interfaces.c_streams%s
+D system.ads		20141031112219 1d274481 system%s
+D s-crtl.ads		20141120112812 0ebbdb71 system.crtl%s
+D s-exctab.ads		20140225151139 54135002 system.exception_table%s
+D s-ficobl.ads		20140718105747 078245e4 system.file_control_block%s
+D s-parame.ads		20140801093848 7e2a0d7f system.parameters%s
+D s-soflin.ads		20140801100131 aa763b52 system.soft_links%s
+D s-stache.ads		20140225151139 a37c21ec system.stack_checking%s
+D s-stalib.ads		20150220094550 fa0a3617 system.standard_library%s
+D s-stoele.ads		20140225151139 2dc34a04 system.storage_elements%s
+D s-traent.ads		20140730135025 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20140731130224 9d58a4c0 system.unsigned_types%s
+D s-wchcon.ads		20140718092328 1b7d22d2 system.wch_con%s
+D temperature_package.ads  20180411014843 ffd2c0ac temperature_package%s
+D temperature_tester.adb  20180410202157 bfc61d6b temperature_tester%b
+X 1 ada.ads
+16K9*Ada 19e8 23|2r6 2r23
+X 6 a-textio.ads
+49K13*Text_IO 471e16 23|2w10 2r27
+166U14*New_Line 23|26s7
+X 22 temperature_package.ads
+8K9*Temperature_Package 65e24 23|3w6 3r31 7r26 10r4 11r4
+9R9*Temperature 64e17 23|7r46
+12U14*Init 23|10s24 11s24
+24U14*GetCelsius 23|16s7
+28U14*GetKelvin 23|22s7
+32U14*GetFahrenheit 23|19s7
+40U14*PrintTemp 23|18s7 21s7 24s7
+44U14*RaiseTemp 23|25s7
+58V13*LessThan{boolean} 23|14s10
+X 23 temperature_tester.adb
+5U11*Temperature_Tester 5b11 29l5 29t23
+7r4 BaseTemp{22|9R9} 10m29 14r19 16m18 18r17 19m21 21r17 22m17 24r17 25m17
+7r14 LimitTemp{22|9R9} 11m29 14r29
+8f4 StepValue{float} 12m4 25r27
+

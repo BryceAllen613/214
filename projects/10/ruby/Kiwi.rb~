@@ -1,0 +1,14 @@
+
+require './Bird.rb'
+
+class Kiwi < Bird
+
+  def call
+    'Chirp'
+  end
+
+  def move
+    'walked'
+  end
+
+end

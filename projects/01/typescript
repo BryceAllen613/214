@@ -1,0 +1,139 @@
+Script started on Tue 06 Feb 2018 06:29:28 PM EST
+bda5@wilkes:~/214/projects/01$ ls
+rectangle_area	    rectangle_area.ali	 RectangleArea.java  rectangle_area.rb	typescript
+rectangle_area.adb  RectangleArea.class  rectangle_area.o    script.e-lisp
+bda5@wilkes:~/214/projects/01$ catre   RectangleArea.java
+/*Bryce Allen
+ *project 01
+ *2/2/18
+ *cs-214
+ */
+import java.util.Scanner;
+
+public class RectangleArea{
+    public static double rectangleArea(double l, double w){
+	return l*w;
+    }
+
+    public static void main(String[] args){
+	Scanner keyboard = new Scanner(System.in);
+	System.out.println("Enter the length:");
+	double length = keyboard.nextDouble();
+	System.out.println("Enter the width:");
+	double width = keyboard.nextDouble();
+	double result = rectangleArea(length,width);
+	System.out.println("The area of the rectangle is: " + result);
+    }
+}
+bda5@wilkes:~/214/projects/01$ javac d -deprecation RectangleArea.java
+bda5@wilkes:~/214/projects/01$ java RectangleArea
+Enter the length:
+19 0
+Enter the width:
+5
+The area of the rectangle is: 50.0
+bda5@wilkes:~/214/projects/01$ cat circle_area.adb
+cat: circle_area.adb: No such file or directory
+bda5@wilkes:~/214/projects/01$ cat Rectangle         rectangle_area.adb
+-- rectangle_area.adb computes area of rectangle
+-- Bryce Allen
+
+with Ada.Text_IO, Ada.Float_Text_IO;
+use  Ada.Text_IO, Ada.Float_Text_IO;
+
+procedure rectangle_area is
+
+   length, width, area : float; 
+
+   -- function rectangleArea computes a circle's area, given its radius
+   -- Parameter: l,w, floats
+   -- Precondition: l/w >= 0.0
+   -- Return: the area of the rectangle
+   ----------------------------------------------------
+   function RectangleArea(L,W: in float) return Float is
+   begin
+      return L*W;
+   end rectangleArea;
+
+begin                           
+   Put_Line("To compute the area of a rectangle,");
+   Put("enter its length: ");
+   Get(length);
+   
+   Put("and its width: ");
+   Get(Width);
+
+   area := rectangleArea(Length,width);
+
+   Put("The rectangle's area is ");
+   Put(area);
+   New_Line;
+end rectangle_area;
+bda5@wilkes:~/214/projects/01$ g gnatmake ci  rectangle_area
+gnatmake: "rectangle_area" up to date.
+bda5@wilkes:~/214/projects/01$ ./gna   rectangle_area
+To compute the area of a rectangle,
+enter its length: 10
+and its width: 5
+The rectangle's area is  5.00000E+01
+bda5@wilkes:~/214/projects/01$ cat script.e-lisp
+
+;;; rectangle_area.el computes the area of a circle. 
+;;;                                                                     
+;;; Input: The length and width of the rectangle.                                  
+;;; Precondition: The lenght/width  is a positive number.                      
+;;; Output:the area of the rectangle.                                 
+;;; 
+;;; Completed by:Bryce Allen
+;;; Date: February, 5, 2018
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                   
+
+;;; function rectangleArea computes area of rectangle
+;;; input: length, width
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                  
+(defun rectangleArea (length width)
+  "Compute the area of a rectangle, passed length and width."            
+  (* length width))      
+rectangleArea
+(rectangleArea 5 10)
+50
+
+
+(defun rectangle_area(l w)
+  "Compute the area of a rectangle given length and width."
+  (interactive "nEnter the rectangle's length: ")
+  (interactive "nEnter the rectangle's width: ")
+  (setq area (rectangleArea l w))      
+  (message "The rectangle's area is %f." area))
+
+rectangle_area
+(rectangle_area 5 10)
+"The rectangle's area is 50.000000."
+bda5@wilkes:~/214/projects/01$ ./  cat rectangle_area.rb
+#rectangle_area.rb computes area of rectangle
+#input: length and width of said rectangle
+#Started by: Bryce Allen
+#2/6/18
+#################################################
+
+def rectangleArea(l,w)
+    l*w 
+end
+
+if __FILE__ == $0
+   puts "To compute the area of a rectangle,"
+   print " enter its length: "
+   length = gets.chomp.to_f
+   print " enter its width: "
+   width = gets.chomp.to_f
+   print "The circle's area is: "
+   puts rectangleArea(length,width)
+end
+bda5@wilkes:~/214/projects/01$ ruby circ    rectangle_area.rb
+To compute the area of a rectangle,
+ enter its length: 10
+ enter its width: 5
+The circle's area is: 50.0
+bda5@wilkes:~/214/projects/01$ exit
+
+Script done on Tue 06 Feb 2018 06:34:19 PM EST

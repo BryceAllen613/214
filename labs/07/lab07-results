@@ -1,0 +1,335 @@
+Script started on Wed 28 Mar 2018 04:30:03 PM EDT
+bda5@boole:~/214/labs/07$ make java
+javac -deprecation NameTester.java
+bda5@boole:~/214/labs/07$ java NameTester
+John Paul Jones
+All tests passed!
+bda5@boole:~/214/labs/07$ cat NameTester.java
+/* NameTester.java is a 'driver' to test class Name.
+ * Begun by: Prof. Adams, for CS 214 at Calvin College.
+ * Student: Bryce Allen
+ * Date:3/28/18
+ ************************************************************/
+
+public class NameTester  
+{
+  public static void main(String[] args)
+  {
+      Name aName = new Name("John", "Paul", "Jones");
+//
+      assert aName.getFirst().equals("John") ;
+      assert aName.getMiddle().equals("Paul") ;
+      assert aName.getLast().equals("Jones") ;
+
+      System.out.println(aName);
+      assert aName.toString().equals("John Paul Jones");
+
+      System.out.println("All tests passed!");
+  }
+}
+
+class Name
+{
+    private String firstName;
+    private String middleName;
+    private String lastName;
+
+    public Name(String fn, String mn, String ln)
+    {
+	firstName = fn;
+	middleName = mn;
+	lastName = ln;
+    }
+    /*returns the first name of Name object
+     *@return firstName
+     */
+    
+    public String getFirst(){ return firstName; }
+    /*returns the middle name of Name object
+     *@return middleName
+     */
+    
+    public String getMiddle(){ return middleName; }
+    /*returns the last name of Name object
+     *@return lastName
+     */
+    
+    public String getLast(){ return lastName; }
+    /*returns the full name of Name object
+     *@return firstName + middleName + lastName
+     */
+    
+    public String toString(){ return firstName +
+	    " " + middleName +
+	    " " + lastName; }
+};
+bda5@boole:~/214/labs/07$ exit
+
+Script done on Wed 28 Mar 2018 04:30:24 PM EDT
+Script started on Wed 28 Mar 2018 04:30:34 PM EDT
+bda5@boole:~/214/labs/07$ make ada
+gnatmake name_tester -gnata
+gcc-5 -c -gnata name_tester.adb
+gnatbind-5 -x name_tester.ali
+gnatlink-5 name_tester.ali
+bda5@boole:~/214/labs/07$ ./N name_tester
+John    Paul    Jones   
+All tests passed!
+bda5@boole:~/214/labs/07$ cat name_tester.adb
+-- namer.adb "test-drives" the Name type.
+-- Begun by: Prof. Adams, CS 214 at Calvin College.
+-- Completed by: Bryce Allen
+-- Date: 3/28/18
+----------------------------------------------
+
+with Ada.Text_IO; use Ada.Text_IO;
+
+procedure name_tester is
+
+  NAME_SIZE : constant Integer := 8;
+
+  type Name is 
+     record
+	MyFirst, MyMiddle, MyLast : String(1..NAME_SIZE);
+     end record;
+
+  aName : Name ;
+
+  ----------------------------------------------
+  -- Init initializes a Name variable          -
+  -- Receive: theName, the Name variable;      -
+  --          First, the first name;           -
+  --          Middle, the middle name;         -
+  --          Last, the last name.             -
+  -- Return: theName, its fields set to First, -
+  --               Middle, and Last.           -
+  ----------------------------------------------
+
+   procedure Init (TheName : out Name; First, Middle, Last : in String) is
+begin
+    TheName.MyFirst := First;
+    TheName.MyMiddle := Middle;
+    TheName.MyLast := Last;
+end Init;
+
+  ----------------------------------------------
+  -- getFirst(Name) retrieves Name.myFirst        -
+  -- Receive: theName, a Name.                 -
+  -- PRE: theName has been initialized.        -
+  -- Return: theName.myFirst.                  -
+  ----------------------------------------------
+
+function GetFirst (TheName : in Name) return String is
+begin
+   return TheName.MyFirst;
+end GetFirst;
+
+  ----------------------------------------------
+  -- getMiddle(Name) retrieves Name.myMiddle        -
+  -- Receive: theName, a Name.                 -
+  -- PRE: theName has been initialized.        -
+  -- Return: theName.myMiddle.                  -
+  ----------------------------------------------
+function GetMiddle (TheName : in Name) return String is
+begin
+   return TheName.MyMiddle;
+end GetMiddle;
+
+  ----------------------------------------------
+  -- getLast(Name) retrieves Name.myLast        -
+  -- Receive: theName, a Name.                 -
+  -- PRE: theName has been initialized.        -
+  -- Return: theName.myLast.                  -
+  ----------------------------------------------
+function GetLast (TheName : in Name) return String is
+begin
+   return TheName.MyLast;
+end GetLast;
+
+  -----------------------------------------------
+  -- getFullName(Name) retrieves Name as a String  -
+  -- Receive: theName, a Name.                  -
+  -- PRE: theName has been initialized.         -
+  -- Return: a String representation of theName -
+  -----------------------------------------------
+
+function GetFullName(TheName : in Name) return String is
+begin
+   return TheName.MyFirst & TheName.MyMiddle & TheName.MyLast;
+end GetFullName;
+
+  ----------------------------------------------
+  -- Put(Name) displays a Name value.          -
+  -- PRE: theName has been initialized.        -
+  -- Receive: theName, a Name.                 -
+  -- Output: theName, to the screen.           -
+  ----------------------------------------------
+
+procedure Put(TheName : in Name) is
+begin
+   Put(GetFullName(TheName));
+end Put;
+
+begin
+   Init(aName, "John    ", "Paul    ", "Jones   ");
+
+   pragma Assert( GetFirst(aName) = "John    ", "getFirst() failed");
+   pragma Assert( GetMiddle(aName) = "Paul    ", "getMiddle() failed");
+   pragma Assert( GetLast(aName) = "Jones   ", "getLast() failed");
+   pragma Assert( GetFullName(aName) = "John    Paul    Jones   ", 
+                    "getFullName() failed");
+
+   Put(aName); New_line;
+   Put("All tests passed!"); New_line;
+
+end name_tester;
+
+bda5@boole:~/214/labs/07$ exit
+
+Script done on Wed 28 Mar 2018 04:30:56 PM EDT
+;;; nameTester.el simulates and tests an e-LISP Name type.
+;;; Begun by: Dr. Adams, CS 214 at Calvin College.
+;;; Completed by: Bryce Allen
+;;; Date: 3/28/18
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Name constructs a name from three strings.      ;;
+;;; Receive: first, middle and last, three strings. ;;
+;;; Return: the triplet (first middle last).        ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun Name (first middle last)
+  (list first middle last))
+
+Name
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; getFirst extracts the first name of a name object.;
+;;; Receive: theName, a Name.                       
+;;; Return: the first string in theName.           
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun getFirst (theName)
+  (car theName))
+
+getFirst
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; getMiddle extracts the middle name of a name object.
+;;; Receive: theName, a Name.                      
+;;; Return: the second string in theName.           
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun getMiddle (theName)
+  (car (cdr theName)))
+
+getMiddle
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; getLast extracts the last name of a name object.
+;;; Receive: theName, a Name.                    
+;;; Return: the third string in theName.       
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (defun getLast (theName)
+    (car (cdr (cdr theName))))
+
+getLast
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; getFullName returns a full name in F-M-L order. 
+;;; Return: myFirst, myMiddle, myLast.           
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (defun getFullName (theName)
+    (concat (getFirst theName) " " (getMiddle theName) " " (getLast theName)))
+
+getFullName
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; printName displays a name object.         
+;;; Receive: theName, a Name,                 
+;;;          buffer, the name of a buffer.   
+;;; Output: the strings in theName to buffer. ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (defun printName (theName buffer)
+    (princ (concat (getFirst theName) " " (getMiddle theName) " " (getLast theName)) buffer) theName)
+
+printName
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; A simple driver for our Name functions. ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(progn
+  (require 'cl)                              ; assert
+  (setq aName (Name "John" "Paul" "Jones"))  ; build a Name
+
+  (assert (equal (getFirst aName) "John" ))  ; test it
+  (assert (equal (getMiddle aName) "Paul" ))
+  (assert (equal (getLast aName) "Jones" ))
+  (assert (equal (getFullName aName) "John Paul Jones" ))
+
+  (setq buf (get-buffer "nameTester.el"))    ; buf = this buffer
+  (assert (eq (printName aName buf) aName) ) ; output
+  (terpri buf)                               ; newline
+  (princ "All tests passed!" buf)            ; feedback
+  (terpri buf))
+
+t
+John Paul Jones
+All tests passed!
+
+
+
+
+
+Script started on Wed 28 Mar 2018 04:31:04 PM EDT
+bda5@boole:~/214/labs/07$ ruby na  NameTester.rb
+John Paul Jones
+All tests passed!
+bda5@boole:~/214/labs/07$ cat NameTester.rb
+# NameTester.rb tests class Name and its operations
+#
+# Begun by: Dr. Adams, for CS 214 at Calvin College.
+# Completed by: Bryce Allen
+# Date: 3/28/18
+####################################################
+
+require 'test/unit/assertions'   # needed for assert
+include Test::Unit::Assertions
+
+class Name
+  #Initializes the a Name object
+  #param first middle and last: first middle and last names respectively
+  def initialize(first, middle, last)
+    @first, @middle, @last = first, middle, last
+  end
+  
+  attr_reader :first, :middle, :last
+  
+  #returns the full name of representing the object
+  def fullName
+   return @first + " " + @middle + " " + @last
+  end
+
+  #prints fullName function and returns it aswell
+  def print
+    puts fullName
+    return fullName
+  end
+end
+
+
+def testName
+   name = Name.new("John", "Paul", "Jones")
+
+   assert name.first == "John", "first failed"
+   assert name.middle == "Paul", "middle failed"
+   assert name.last == "Jones", "last failed"
+   assert name.fullName == "John Paul Jones", "fullName failed"
+   assert name.print == "John Paul Jones", "print failed"
+   
+   print "All tests passed!\n"
+end
+
+testName
+
+bda5@boole:~/214/labs/07$ exit
+
+Script done on Wed 28 Mar 2018 04:31:21 PM EDT

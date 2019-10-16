@@ -1,0 +1,35 @@
+;; TemperatureTester.el tests temperature type
+;; Bryce Allen
+;; Calvin College
+;; CS 214
+;; 4/10/18
+
+(setq load-path (cons "/home/bda5/214/projects/08" load-path))
+(load "Temperature.elc")
+
+;; Recursive function to test the Temperature type
+(defun testTemperature(theTemp limitTemp stepVal)
+  (if (lessThan theTemp limitTemp)
+    (setq theTemp (getFahrenheit theTemp))
+    (printTemp theTemp)
+    (setq theTemp (getCelsius theTmep))
+    (printTemp theTemp)
+    (setq theTemp (getKelvin theTemp))
+    (printTemp theTemp)
+    (setq theTemp (raise theTemp stepVal))
+    (testTemperature theTemp limitTemp stepVal)))
+
+
+testTemperature
+
+
+(defun tester()
+  (setq baseTemp (Temperature 0 "F"))
+  (setq limitTemp (Temperature 100 "C"))
+  (testTemperature baseTemp limitTemp 2.5)
+
+  (setq baseTemp1 (Temperature 0 "K"))
+  (setq limitTemp1 (Temperature 212 "F"))
+  (testTemperature baseTemp1 limitTemp1 20.0))
+
+tester

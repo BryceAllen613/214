@@ -1,0 +1,72 @@
+V "GNAT Lib v5"
+A -mtune=generic
+A -march=x86-64
+P SS ZX
+
+RN
+RV NO_IO
+RV NO_SECONDARY_STACK
+RV SPARK_05
+
+U name_package%b	name_package.adb	bee3c3af NE OO PK
+W ada%s			ada.ads			ada.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W system.concat_5%s	s-conca5.adb		s-conca5.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+
+U name_package%s	name_package.ads	8b3af67d EE NE OO PK
+
+D ada.ads		20070406091342 3ffc8e18 ada%s
+D a-except.ads		20140730140058 5250cb69 ada.exceptions%s
+D a-ioexce.ads		20140225151544 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20141120112812 119b8fb3 ada.streams%s
+D a-tags.ads		20140730140058 dc4d0634 ada.tags%s
+D a-textio.ads		20140717063745 386df5d4 ada.text_io%s
+D a-unccon.ads		20070406091342 f9eb8f06 ada.unchecked_conversion%s
+D interfac.ads		20141120112812 6033a23f interfaces%s
+D i-cstrea.ads		20140801100435 e53d8b8e interfaces.c_streams%s
+D name_package.ads	20180405233021 8b3af67d name_package%s
+D name_package.adb	20180405232959 0db4c006 name_package%b
+D system.ads		20141031112219 1d274481 system%s
+D s-conca5.ads		20140225151544 875e432e system.concat_5%s
+D s-crtl.ads		20141120112812 0ebbdb71 system.crtl%s
+D s-exctab.ads		20140225151139 54135002 system.exception_table%s
+D s-ficobl.ads		20140718105747 078245e4 system.file_control_block%s
+D s-parame.ads		20140801093848 7e2a0d7f system.parameters%s
+D s-secsta.ads		20140225151139 86a2856d system.secondary_stack%s
+D s-soflin.ads		20140801100131 aa763b52 system.soft_links%s
+D s-stache.ads		20140225151139 a37c21ec system.stack_checking%s
+D s-stalib.ads		20150220094550 fa0a3617 system.standard_library%s
+D s-stoele.ads		20140225151139 2dc34a04 system.storage_elements%s
+D s-traent.ads		20140730135025 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20140731130224 9d58a4c0 system.unsigned_types%s
+D s-wchcon.ads		20140718092328 1b7d22d2 system.wch_con%s
+X 1 ada.ads
+16K9*Ada 19e8 11|7r6 7r23
+X 6 a-textio.ads
+49K13*Text_IO 471e16 11|7w10 7r27
+242U14*Put 11|41s5
+X 10 name_package.ads
+8K9*Name_Package 57E3 65l5 65e17 11|8b14 43l5 43t17
+9R9*Name 20r28 27r31 34r32 41r30 48r34 55r24 59c8 64e17 11|9r26 17r29 22r30
+. 27r28 32r32 39r24
+20U15*Init 20<20 20>34 20>41 20>49 11|9b13 15l7 15t11
+20r20 Nm{9R9} 11|9b18 12m5 13m5 14m5
+20a34 First{string} 11|10b18 12r19
+20a41 Middle{string} 11|10b25 13r20
+20a49 Last{string} 11|10b33 14r18
+27V14*getFirst{string} 27>24 11|17b12 20l7 20t15
+27r24 Nm{9R9} 11|17b22 19r12
+34V14*getMiddle{string} 34>25 11|22b12 25l7 25t16
+34r25 Nm{9R9} 11|22b23 24r13
+41V14*getLast{string} 41>23 11|27b12 30l7 30t14
+41r23 Nm{9R9} 11|27b21 29r13
+48V14*getFullName{string} 48>27 11|32b12 37l7 37t18 41s10
+48r27 Nm{9R9} 11|32b25 34r12 35r14 36r14
+55U13*Put 55>17 11|39b13 42l7 42t10
+55r17 Nm{9R9} 11|39b17 41r22
+57i3 NAME_SIZE{positive} 63r29
+61a10*myFirst{string} 11|12m8 19r15 34r15
+62a10*myMiddle{string} 11|13m8 24r16 35r17
+63a10*MyLast{string} 11|14m8 29r16 36r17
+

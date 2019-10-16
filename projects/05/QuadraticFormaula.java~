@@ -1,0 +1,16 @@
+/* QuadraticFormula computes the roots of a quadratic expression
+ * cs 214 Calvin College
+ * Completed by: Bryce Allen
+ * 3/2/18
+ *
+ */
+import java.util.Scanner;
+
+public class QuadraticFormula
+{
+    public static void main(String[] args)
+    {
+	
+    }
+}
+		       

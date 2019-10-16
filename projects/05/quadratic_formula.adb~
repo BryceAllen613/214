@@ -1,0 +1,19 @@
+--quadratic_formula.ada computes the roots of a quadratic equation given the
+--coefficents
+--by: Bryce Allen
+--cs 214 Calvin College
+--3/2/18
+---------------------------------------------------------------------------
+
+with Ada.Text_IO, Ada.Float_Text_IO;
+use  Ada.Text_IO, Ada.Float_Text_IO;
+
+procedure Quadratic_Formula is
+   
+   Root1, Root2 : Float;
+   
+   function QuadraticFormula(A: in Float, B: in Float, C: in Float) return Boolean begin
+     if A
+      
+end Quadratic_Formula
+  

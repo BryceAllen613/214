@@ -1,0 +1,8 @@
+# Ostrich.rb defines a class Ostrich
+#
+# by: Bryce Allen
+# date: 4/23/18
+########################################################
+
+require './Bird.rb'
+

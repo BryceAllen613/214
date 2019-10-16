@@ -1,0 +1,158 @@
+Script started on Tue 27 Feb 2018 04:28:49 PM EST
+bda5@church:~/214/projects/04$ cat script.java
+cat: script.java: No such file or directory
+bda5@church:~/214/projects/04$ ls
+compute_factorial	compute_factorial.el~	script.ada
+compute_factorial.adb	ComputeFactorial.java	script.e-lisp
+compute_factorial.adb~	ComputeFactorial.java~	script.Java
+compute_factorial.ali	compute_factorial.o	script.ruby
+ComputeFactorial.class	compute_factorial.rb	typescript
+compute_factorial.el	compute_factorial.rb~
+bda5@church:~/214/projects/04$ cat script.Java
+Script started on Tue 27 Feb 2018 04:23:57 PM EST
+bda5@church:~/214/projects/04$ javac -deprecation ComputeFactorial.java
+bda5@church:~/214/projects/04$ l java ComputeFactorial
+Enter a value: 
+5
+The factorial of 5 is 120.0
+bda5@church:~/214/projects/04$ cat ComputeFactorial.java
+/*ComputeFactorial.java
+ *Computes factorial with user friendly implementation
+ *By: Bryce Allen
+ *cs 214
+ *Calvin College
+ *2/23/18
+ */
+import java.util.Scanner;
+
+public class ComputeFactorial
+{
+    public static void main(String[] args)
+    {
+	Scanner keyboard = new Scanner(System.in);
+	System.out.println("Enter a value: ");
+	int number = keyboard.nextInt();
+	double factorial = factorial(number);
+	System.out.println("The factorial of " + number + " is " + factorial);
+    }
+
+    /*written by: Bryce Allen.
+     *@param: n representing the integer to be factoralized.
+     *@return: the factorialized answer.
+     */
+    public static double factorial(int n)
+    {
+	double answer = 1.0;
+	for(int i = 2; i <= n; i++)
+        {  answer *= i; }
+	return answer;
+    }
+}
+bda5@church:~/214/projects/04$ exit
+
+Script done on Tue 27 Feb 2018 04:24:38 PM EST
+bda5@church:~/214/projects/04$ cat script.ada
+Script started on Tue 27 Feb 2018 04:24:49 PM EST
+bda5@church:~/214/projects/04$ dnat    gnatmake script.adb          compute_factorial.adb
+gnatmake: "compute_factorial" up to date.
+bda5@church:~/214/projects/04$ ./ compute_factorial. [1P
+Enter a number: 
+5
+        120
+bda5@church:~/214/projects/04$ cat computeFa  _factorial.adb
+
+with Ada.Text_IO, Ada.Integer_Text_IO;
+use  Ada.Text_IO, Ada.Integer_Text_IO;
+
+procedure Compute_Factorial is
+   
+   F, A : Integer;
+   
+   function ComputeFactorial(N: in Integer) return Integer is
+      Answer : Integer;
+   begin
+      Answer:= 1;
+      for I in 2 .. N loop
+	 Answer:= I * Answer;
+      end loop;
+	return Answer;
+   end ComputeFactorial;
+begin
+     Put_Line("Enter a number: ");
+     Get(F);
+     A := ComputeFactorial(F);
+     Put(A);
+end Compute_Factorial;
+      
+bda5@church:~/214/projects/04$ exit
+
+Script done on Tue 27 Feb 2018 04:25:50 PM EST
+bda5@church:~/214/projects/04$ cat script.e-lisp
+;; This buffer is for notes you don't want to save, and for Lisp evaluation.
+;; If you want to create a file, visit that file with C-x C-f,
+;; then enter the text in that file's own buffer.
+
+;;;compute_factorial.el
+;;;Computes Factorialization of given number
+;;;2/24/18
+;;;by: Bryce Allen
+;;;cs 214 at Calvin College
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun computeFactorial (n)
+  (cond ((> n 1) (* n (computeFactorial (- n 1))))
+	((= n 1) 1)
+	(1)))
+
+computeFactorial
+(computeFactorial 5)
+
+120
+
+
+(defun main(num)
+  (interactive "nEnter a number: ")
+    (setq number (computeFactorial num))
+    (message "Factorialization is %f" number))
+
+
+main
+(main 5)
+
+"Factorialization is 120.000000"
+
+bda5@church:~/214/projects/04$ cat script.rb uby
+Script started on Tue 27 Feb 2018 04:26:48 PM EST
+bda5@church:~/214/projects/04$ ruby compute_factorial.rb
+ enter a number: 5
+Factorialization: 120.0
+bda5@church:~/214/projects/04$ cat     cat computeF _factorial.rb
+#function computeFactorial returns the factorial of a number passed
+#parameters: n, the number to be factoralized
+#precondition: n is a positive integer
+#return: the Factoralization of n.
+#2/24/18
+#Completed by: Bryce Allen for cs 214 at Calvin College
+##############################################################################
+
+def computeFactorial(n)
+  a = 1.0
+  for i in 2..n
+    a = a*i
+  end
+  return a
+end
+
+
+if __FILE__ == $0
+   print " enter a number: "
+   num = gets.chomp.to_f
+   print "Factorialization: "
+   puts computeFactorial(num)
+end
+bda5@church:~/214/projects/04$ exit
+
+Script done on Tue 27 Feb 2018 04:27:25 PM EST
+bda5@church:~/214/projects/04$ exit
+
+Script done on Tue 27 Feb 2018 04:29:33 PM EST

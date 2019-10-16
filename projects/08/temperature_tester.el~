@@ -1,0 +1,29 @@
+;; TemperatureTester.el tests temperature type
+;; Bryce Allen
+;; Calvin College
+;; CS 214
+;; 4/10/18
+
+;; Temperature constructs a temperature from two variables, a real and string
+;; receive: degrees and scale
+;; return a list representing the type with degrees and scale
+(defun Temperature(degrees scale)
+  (list degrees scale))
+
+;; getDegrees returns degrees of this temperature
+;; receive theTemp, the temperature we will get degrees
+;; return degrees
+(defun getDegrees(theTemp)
+  (car theTemp))
+
+;; getScale returns scale of this temperature
+;; receive theTemp, the temperature we will get scale
+;; return the scale
+(defun getScale(theTemp)
+  (car (cdr theTemp)))
+
+;(defun getFahrenheit(theTemp)
+ ; (if (= (getScale theTemp) "F") (getDegrees theTemp))
+  ;(if (= (getScale theTemp) "C") (
+
+

@@ -1,0 +1,103 @@
+V "GNAT Lib v5"
+M P W=b
+A -gnata
+P SS ZX
+
+RN
+RV NO_IO
+RV NO_SECONDARY_STACK
+RV SPARK_05
+
+U name_tester%b		name_tester.adb		617b8168 NE OO SU IL
+W ada%s			ada.ads			ada.ali
+W ada.float_text_io%s	a-flteio.ads		a-flteio.ali
+W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
+W ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W system.assertions%s	s-assert.adb		s-assert.ali
+W system.concat_3%s	s-conca3.adb		s-conca3.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+
+D ada.ads		20070406091342 3ffc8e18 ada%s
+D a-except.ads		20140730140058 5250cb69 ada.exceptions%s
+D a-flteio.ads		20070406091342 e18a47a0 ada.float_text_io%s
+D a-inteio.ads		20070406091342 f64b89a4 ada.integer_text_io%s
+D a-ioexce.ads		20140225151544 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20141120112812 119b8fb3 ada.streams%s
+D a-tags.ads		20140730140058 dc4d0634 ada.tags%s
+D a-textio.ads		20140717063745 386df5d4 ada.text_io%s
+D a-tiflio.ads		20140717063513 56fbda09 ada.text_io.float_io%s
+D a-tiinio.ads		20140717063513 aa04e5d6 ada.text_io.integer_io%s
+D a-unccon.ads		20070406091342 f9eb8f06 ada.unchecked_conversion%s
+D interfac.ads		20141120112812 6033a23f interfaces%s
+D i-cstrea.ads		20140801100435 e53d8b8e interfaces.c_streams%s
+D name_tester.adb	20180404145455 4ed7bab8 name_tester%b
+D system.ads		20141031112219 1d274481 system%s
+D s-assert.ads		20140225151544 cd8d2c94 system.assertions%s
+D s-conca3.ads		20140225151544 0b705ca5 system.concat_3%s
+D s-crtl.ads		20141120112812 0ebbdb71 system.crtl%s
+D s-exctab.ads		20140225151139 54135002 system.exception_table%s
+D s-ficobl.ads		20140718105747 078245e4 system.file_control_block%s
+D s-parame.ads		20140801093848 7e2a0d7f system.parameters%s
+D s-secsta.ads		20140225151139 86a2856d system.secondary_stack%s
+D s-soflin.ads		20140801100131 aa763b52 system.soft_links%s
+D s-stache.ads		20140225151139 a37c21ec system.stack_checking%s
+D s-stalib.ads		20150220094550 fa0a3617 system.standard_library%s
+D s-stoele.ads		20140225151139 2dc34a04 system.storage_elements%s
+D s-traent.ads		20140730135025 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20140731130224 9d58a4c0 system.unsigned_types%s
+D s-wchcon.ads		20140718092328 1b7d22d2 system.wch_con%s
+X 1 ada.ads
+16K9*Ada 19e8 14|8r6 8r23 9r6 9r29 10r6 10r31
+X 3 a-flteio.ads
+20K13*Float_Text_IO[9|46] 14|9w10 9r33
+X 4 a-inteio.ads
+18K13*Integer_Text_IO[10|46] 14|10w10 10r35
+X 8 a-textio.ads
+49K13*Text_IO 471e16 14|8w10 8r27
+166U14*New_Line 14|155s16 156s30
+240U14*Get 14|123s4 125s4 127s4
+242U14*Put 14|95s4 122s4 156s4
+X 14 name_tester.adb
+12U11*name_tester 12b11 158l5 158t16
+14i3 NAME_SIZE{integer} 18r47 120r25
+16R8 Name 19e16 21r11 33r34 47r33 58r34 69r32 81r35 93r28 98r34 103r35 108r33
+. 113r28 119r30
+18a9 MyFirst{string} 35m13 49r19 83r19 100m12 116r36 124m12
+18a18 MyMiddle{string} 36m13 60r19 83r37 105m12 114r26 126m12
+18a28 MyLast{string} 37m13 71r19 83r56 110m12 116r19 128m12
+21r3 aName{16R8} 134m9 136r28 137r29 138r27 139r31 141r24 142m9 143r28 144r29
+. 145r27 146r31 148m13 149m14 150m12 151r28 152r29 153r27 155r8
+33U14 Init 33b14 33<20 33>40 33>47 33>55 38l5 38t9 134s4
+33r20 TheName{16R8} 35m5 36m5 37m5
+33a40 First{string} 35r24
+33a47 Middle{string} 36r25
+33a55 Last{string} 37r23
+47V10 GetFirst{string} 47b10 47>20 50l5 50t13 136s19 143s19 151s19
+47r20 TheName{16R8} 49r11
+58V10 GetMiddle{string} 58b10 58>21 61l5 61t14 137s19 144s19 152s19
+58r21 TheName{16R8} 60r11
+69V10 GetLast{string} 69b10 69>19 72l5 72t12 138s19 145s19 153s19
+69r19 TheName{16R8} 71r11
+81V10 GetFullName{string} 81b10 81>22 84l5 84t16 95s8 139s19 146s19
+81r22 TheName{16R8} 83r11 83r29 83r48
+93U11 Put 93b11 93>15 96l5 96t8 155s4
+93r15 TheName{16R8} 95r20
+98U11 SetFirst 98b11 98<20 98>40 101l5 101t13 148s4
+98r20 TheName{16R8} 100m4
+98a40 F{string} 100r23
+103U11 SetMiddle 103b11 103<21 103>41 106l5 106t14 149s4
+103r21 TheName{16R8} 105m4
+103a41 M{string} 105r24
+108U11 Setlast 108b11 108<19 108>39 111l5 111t12 150s4
+108r19 TheName{16R8} 110m4
+108a39 L{string} 110r22
+113V10 Lfmi{string} 113b10 113>15 117l5 117t9 141s19
+113r15 TheName{16R8} 114r18 116r11 116r28
+114a4 F{string} 116r46
+119U11 Read 119b11 119<16 130l5 130t9 142s4
+119r16 TheName{16R8} 124m4 126m4 128m4
+120a4 F{string} 123m8 124r23
+120a7 M{string} 125m8 126r24
+120a10 L{string} 127m8 128r22
+

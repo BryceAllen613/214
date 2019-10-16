@@ -1,0 +1,10 @@
+;;array_processing.el processes an array (prints all elements)
+;;by: Bryce Allen
+;;cs-214 @ Calvin College
+;;3/26/18
+
+(defun printArray(anArray pos size)
+  (if (< pos size)
+  (message " %f " (aref anArray (pos)))
+  (setq pos (+ pos 1))
+  (printArray anArray pos size)))

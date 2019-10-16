@@ -1,0 +1,102 @@
+/* Temperature.java represents aggregate type temperature
+ * cs 214
+ * Calvin College
+ * Bryce Allen
+ * 4/6/18
+ */
+
+public class Temperature
+{
+    private double degrees;
+    private char scale;
+
+    public Temperature(){}
+    
+    public Temperature(double d, char s)
+    {
+	this.degrees = d;
+	this.scale = s;
+    }
+
+    private boolean isValid(double d, char s)
+    {
+	if( ( s == 'f' || s== 'F' || s == 'c' || s == 'C') )
+	    return true;
+	if( (s == 'k' || s == 'K') && (d >= 0) )
+	    return true;
+	else
+	    return false;
+    }
+
+    public double getDegrees() { return degrees; }
+    public char getScale() { return scale; }
+
+    public double toFahrenheit(double t)
+    {
+	scale = 'F';
+	if( scale == 'f' || scale == 'F' )
+	    { return t; }
+	else if( scale == 'c' || scale == 'C' )
+	    { return ((t*9)/5.0) + 32; }
+	else {
+	    return ((9.0/5.0)*(t-273)) +32;
+	}  
+    }
+
+    public double toCelsius(double t)
+    {
+	scale = 'C';
+	if( scale == 'c' || scale == 'C' )
+	    { return t; }
+	else if( scale == 'f' || scale == 'F' )
+	    { return ((5.0/9.0)*(t-32)); }
+	else
+	    { return t-273; }
+    }
+
+    public double toKelvin(double t)
+    {
+	scale = 'K';
+	if( scale == 'k' || scale == 'K' )
+	    { return t; }
+	else if( scale == 'c' || scale == 'C' )
+	    { return t+273; }
+	else
+	    { return ((5.0/9.0)*(t-32)) + 273; }
+    }
+
+    public void setTemperature(String temp) // isValid on this one
+    {
+	char newScale = temp.charAt(temp.length()-1);
+	//temp.substring(temp.length()-2, temp.length()-1);
+	double newDegrees = Double.parseDouble(temp.substring(0, temp.length()-2));
+
+	scale = newScale;
+	degrees = newDegrees;
+    }
+
+    public String printTemperature()
+    { return degrees + " " + scale; }
+
+    public Temperature raise(Temperature t, double d) // isValid on this one
+    {
+	if( isValid(t.getDegrees(), t.getScale()) )
+	    return new Temperature(t.getDegrees() + d, t.getScale());
+	else
+	    return this;
+    }
+
+    public Temperature lower(Temperature t, double d) // isValid on this one
+    {
+	if( isValid(t.getDegrees(), t.getScale()) )
+	    return new Temperature(t.getDegrees() - d, t.getScale());
+	else
+	    return this;
+    }
+    
+    public boolean equals(Temperature t) // isValid on this one
+    { return (this.getDegrees() == t.getDegrees()); }
+
+    public boolean lessThan(Temperature t) // isValid on this one
+    { return getDegrees() < t.getDegrees(); }
+}

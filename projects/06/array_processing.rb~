@@ -1,0 +1,10 @@
+## array_processing.rb processes (reads and write values) to an array.
+## By: Bryce Allen
+## cs 214
+## Calvin College
+## 3/27/18
+##########################################################################
+
+def readValues()
+  begin
+  end

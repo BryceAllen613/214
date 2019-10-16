@@ -1,0 +1,739 @@
+Script started on Thu 12 Apr 2018 06:05:50 PM EDT
+bda5@augusta:~/214/projects/08/Java$ cat Temperature.java
+/* Temperature.java represents aggregate type temperature
+ * cs 214
+ * Calvin College
+ * Bryce Allen
+ * 4/6/18
+ */
+
+public class Temperature
+{
+    private double degrees;
+    private char scale;
+
+    public Temperature(){}
+
+    /* Explicit constructor
+     * params d and s initialize degrees and scale
+     */
+    public Temperature(double d, char s)
+    {
+	this.degrees = d;
+	this.scale = s;
+    }
+    /* tests if the temperature is valid
+     * @return true if valid false otherwise
+     * @params d and s representing degrees and scale respectively
+     */
+    private boolean isValid(double d, char s)
+    {
+	if( ( s == 'f' || s== 'F' || s == 'c' || s == 'C') )
+	    return true;
+	if( (s == 'k' || s == 'K') && (d >= 0) )
+	    return true;
+	else
+	    return false;
+    }
+
+    /* returns degrees
+     * @return degrees
+     */
+    public double getDegrees() { return degrees; }
+    
+    /* returns scale
+     * @return scale
+     */
+    public char getScale() { return scale; }
+
+    /* returns a double representing the temperature as fahrenheit
+     * @param t the temperature to be converted
+     * @return the temperature as a new scale
+     */
+    public double toFahrenheit(double t)
+    {
+	scale = 'F';
+	if( scale == 'f' || scale == 'F' )
+	    { return t; }
+	else if( scale == 'c' || scale == 'C' )
+	    { return ((t*9)/5.0) + 32; }
+	else {
+	    return ((9.0/5.0)*(t-273)) +32;
+	}  
+    }
+    
+    /* returns a double representing the temperature as celsius
+     * @param t the temperature to be converted
+     * @return the temperature as a new scale
+     */
+    public double toCelsius(double t)
+    {
+	scale = 'C';
+	if( scale == 'c' || scale == 'C' )
+	    { return t; }
+	else if( scale == 'f' || scale == 'F' )
+	    { return ((5.0/9.0)*(t-32)); }
+	else
+	    { return t-273; }
+    }
+    
+    /* returns a double representing the temperature as Kelvin
+     * @param t the temperature to be converted
+     * @return the temperature as a new scale
+     */
+    public double toKelvin(double t)
+    {
+	scale = 'K';
+	if( scale == 'k' || scale == 'K' )
+	    { return t; }
+	else if( scale == 'c' || scale == 'C' )
+	    { return t+273; }
+	else
+	    { return ((5.0/9.0)*(t-32)) + 273; }
+    }
+
+    /* sets temperature to new degrees and scale from input string
+     * @param temp, the new temperature as a string
+     *
+     */
+    public void setTemperature(String temp) // isValid on this one
+    {
+	char newScale = temp.charAt(temp.length()-1);
+	//temp.substring(temp.length()-2, temp.length()-1);
+	double newDegrees = Double.parseDouble(temp.substring(0, temp.length()-2));
+
+	scale = newScale;
+	degrees = newDegrees;
+    }
+
+    /* returns this temperature as a string
+     * @return degrees and scale as a string
+     */
+    public String printTemperature()
+    { return degrees + " " + scale; }
+
+    /* raises the input temperature by d amount
+     * @param t and d, temperature and degrees respectively
+     * @return new temperature object
+     */
+    public Temperature raise(Temperature t, double d) // isValid on this one
+    {
+	if( isValid(t.getDegrees(), t.getScale()) )
+	    return new Temperature(t.getDegrees() + d, t.getScale());
+	else
+	    return this;
+    }
+    
+    /* lowers the input temperature by d amount
+     * @param t and d, temperature and degrees respectively
+     * @return new temperature object
+     */
+    public Temperature lower(Temperature t, double d) // isValid on this one
+    {
+	if( isValid(t.getDegrees(), t.getScale()) )
+	    return new Temperature(t.getDegrees() - d, t.getScale());
+	else
+	    return this;
+    }
+
+    /* tests if two temperatures are equal
+     * @param t, temperature to be tested to this
+     * @return true if equal, false otherwise
+     */
+    public boolean equals(Temperature t) // isValid on this one
+    { return (this.getDegrees() == t.getDegrees()); }
+
+    /* tests if two temperatures are less than/ unequal
+     * @param t, temperature to be tested to this
+     * @return true if this is less than t, false otherwise
+     */    
+    public boolean lessThan(Temperature t) // isValid on this one
+    { return getDegrees() < t.getDegrees(); }
+}
+bda5@augusta:~/214/projects/08/Java$ cat temperature           TemperatureTester.java
+/* TemperatureTester.java tests the module/aggregate type Temperature
+ * cs 214
+ * Calvin College
+ * Bryce Allen
+ * 4/6/18
+ */
+import java.util.Scanner;
+public class TemperatureTester
+{
+    public static void main(String[] args)
+    {
+	Temperature baseTemp = new Temperature(0.0, 'F');
+	Temperature limitTemp = new Temperature(100.0, 'C');
+	double stepValue = 2.5;
+
+	while( !(baseTemp.equals(limitTemp)) )
+        {
+	    baseTemp.toCelsius(baseTemp.getDegrees());
+	    System.out.print(baseTemp.printTemperature() + " ");
+	    baseTemp.toKelvin(baseTemp.getDegrees());
+	    System.out.print(baseTemp.printTemperature() + " ");
+	    baseTemp.toFahrenheit(baseTemp.getDegrees());
+	    System.out.print(baseTemp.printTemperature() + " ");
+	    baseTemp = baseTemp.raise(baseTemp, stepValue);
+	    System.out.println("");
+	}
+
+       	Temperature baseTemp1 = new Temperature(0.0, 'K');
+	Temperature limitTemp1 = new Temperature(212.0, 'F');
+	double stepValue1 = 20.0;
+
+	while( !(baseTemp1.equals(limitTemp)) )
+        {
+	    baseTemp1.toCelsius(baseTemp1.getDegrees());
+	    System.out.print(baseTemp1.printTemperature() + " ");
+	    baseTemp1.toKelvin(baseTemp1.getDegrees());
+	    System.out.print(baseTemp1.printTemperature() + " ");
+	    baseTemp1.toFahrenheit(baseTemp1.getDegrees());
+	    System.out.print(baseTemp1.printTemperature() + " ");
+	    baseTemp1 = baseTemp1.raise(baseTemp1, stepValue1);
+	    System.out.println("");
+	}
+    }
+}
+bda5@augusta:~/214/projects/08/Java$ javac -deprecation TemperatureTester.java
+bda5@augusta:~/214/projects/08/Java$ java Temperature Tester
+Error: Main method not found in class Temperature, please define the main method as:
+   public static void main(String[] args)
+or a JavaFX application class must extend javafx.application.Application
+bda5@augusta:~/214/projects/08/Java$ java Temperature Tester [1P
+0.0 C 0.0 K 0.0 F 
+2.5 C 2.5 K 2.5 F 
+5.0 C 5.0 K 5.0 F 
+7.5 C 7.5 K 7.5 F 
+10.0 C 10.0 K 10.0 F 
+12.5 C 12.5 K 12.5 F 
+15.0 C 15.0 K 15.0 F 
+17.5 C 17.5 K 17.5 F 
+20.0 C 20.0 K 20.0 F 
+22.5 C 22.5 K 22.5 F 
+25.0 C 25.0 K 25.0 F 
+27.5 C 27.5 K 27.5 F 
+30.0 C 30.0 K 30.0 F 
+32.5 C 32.5 K 32.5 F 
+35.0 C 35.0 K 35.0 F 
+37.5 C 37.5 K 37.5 F 
+40.0 C 40.0 K 40.0 F 
+42.5 C 42.5 K 42.5 F 
+45.0 C 45.0 K 45.0 F 
+47.5 C 47.5 K 47.5 F 
+50.0 C 50.0 K 50.0 F 
+52.5 C 52.5 K 52.5 F 
+55.0 C 55.0 K 55.0 F 
+57.5 C 57.5 K 57.5 F 
+60.0 C 60.0 K 60.0 F 
+62.5 C 62.5 K 62.5 F 
+65.0 C 65.0 K 65.0 F 
+67.5 C 67.5 K 67.5 F 
+70.0 C 70.0 K 70.0 F 
+72.5 C 72.5 K 72.5 F 
+75.0 C 75.0 K 75.0 F 
+77.5 C 77.5 K 77.5 F 
+80.0 C 80.0 K 80.0 F 
+82.5 C 82.5 K 82.5 F 
+85.0 C 85.0 K 85.0 F 
+87.5 C 87.5 K 87.5 F 
+90.0 C 90.0 K 90.0 F 
+92.5 C 92.5 K 92.5 F 
+95.0 C 95.0 K 95.0 F 
+97.5 C 97.5 K 97.5 F 
+0.0 C 0.0 K 0.0 F 
+20.0 C 20.0 K 20.0 F 
+40.0 C 40.0 K 40.0 F 
+60.0 C 60.0 K 60.0 F 
+80.0 C 80.0 K 80.0 F 
+bda5@augusta:~/214/projects/08/Java$ exit
+
+Script done on Thu 12 Apr 2018 06:06:44 PM EDT
+Script started on Thu 12 Apr 2018 06:08:37 PM EDT
+bda5@augusta:~/214/projects/08/Ada$ cat temperature_package.ads
+-- Temperature.ads represents aggregate type temperature
+-- cs 214
+-- Calvin College
+-- Bryce Allen
+-- 4/6/18
+
+with Ada.Text_IO; use Ada.Text_IO;
+package Temperature_Package is
+   type Temperature is private;
+   --initializes the temperature object
+   -- T, D, S Temperature, Degrees, Scale respectively
+   procedure Init(T : out Temperature; D : in Float; S : in String);
+   
+   --returns the degrees of this
+   --T, temperature to get degrees from
+   function GetDegrees(T : in Temperature) return Float;
+   
+   --returns the scale of this object
+   --T, temperature to get Scale from
+   function GetScale(T : in Temperature) return String;--(1.. 1);
+   
+   --sets degrees to celsius equivalence
+   --T, input temperature
+   procedure GetCelsius(T : out Temperature);-- return Float;
+   
+   --sets degrees to Kelvin equivalence 
+   --T, input temperature
+   procedure GetKelvin(T : out Temperature);-- return Float;
+   
+   --sets degrees to Fahrenheit equivalence
+   --T, input temperature
+   procedure GetFahrenheit(T : out Temperature);-- return Float;
+   
+   --sets temperature to new degrees and scale
+   --T,D,S output temperature, new degrees, new scale respectively
+   procedure InputTemp(T : out Temperature; D : in Float; S : in String);
+   
+   --outputs temperature as a string
+   --T, input temperature
+   procedure PrintTemp(T : in Temperature);-- return String;--(1.. 8);
+   
+   --raises temperature by d amount
+   --T, D, ouput temperature and degree increase respectively
+   procedure RaiseTemp(T : out Temperature; D : in Float);
+   
+   --lowers temperature by d amount
+   --T, D, ouput temperature and degree decrease respectively
+   procedure LowerTemp(T : out Temperature; D : in Float);
+   
+   --tests if two temperatures are equal
+   --T, T2, the two temperatures to be compared
+   --returns true if equal, false otherwise
+   function Equals(T : in Temperature; T2 : in Temperature) return Boolean;
+   
+   --tests if two temperatures are less than eachother
+   --T, T2, the two temperatures to be compared
+   --returns true if T is less than T2, false otherwise
+   function LessThan(T : in Temperature; T2 : in Temperature) return Boolean;
+private
+   type Temperature is
+      record
+	 Degrees : Float;
+	 Scale : String(1.. 1);
+      end record;
+end Temperature_Package;
+bda5@augusta:~/214/projects/08/Ada$ cat temperature_package.adss b
+with Ada.Text_IO; use Ada.Text_IO;
+
+package body Temperature_Package is
+   
+   procedure Init(T : out Temperature; D : in Float; S : in String) is
+   begin
+      T.Degrees := D;
+      T.Scale := S;
+   end Init;
+   
+   function GetDegrees(T : in Temperature) return Float is
+   begin
+      return T.Degrees;
+   end GetDegrees;
+   
+   function GetScale(T : in Temperature) return String is
+   begin
+      return T.Scale;
+   end GetScale;
+      
+   procedure GetCelsius(T : out Temperature) is--return Float is
+   begin 
+      T.Scale := "C";
+      if T.Scale = "C" or T.Scale = "c" then
+	 return;--return T.Degrees;
+      else if (T.Scale = "F" or T.Scale = "f") then
+	 T.Degrees := (T.Degrees - 32.0)*(5.0/9.0);
+	 --return T.Degrees;
+      else
+	 T.Degrees := (T.Degrees - 273.15);
+	 --return T.Degrees;
+      end if;
+      end if;
+   end GetCelsius;
+      
+   procedure GetKelvin(T : out Temperature) is--return Float is
+   begin 
+      T.Scale := "K";
+      if T.Scale = "K" or T.Scale = "k" then
+	 -- return T.Degrees;
+	 return;
+      else if (T.Scale = "F" or T.Scale = "f") then
+	 T.Degrees := ((T.Degrees - 32.0) * (5.0/9.0)) + 273.15;
+	 --return T.Degrees;
+      else
+	 T.Degrees := (T.Degrees + 273.15);
+	 --return T.Degrees;
+      end if;
+      end if;
+   end GetKelvin;
+   
+   procedure GetFahrenheit(T : out Temperature) is-- return Float is
+   begin
+      T.Scale := "F";
+      if T.Scale = "F" or T.Scale = "f" then
+	 -- return T.Degrees;
+	 --return;
+	 T.Degrees := T.Degrees;
+      else if (T.Scale = "C" or T.Scale = "c") then
+	 T.Degrees := ((T.Degrees * (9.0/5.0)) + 32.0);
+	-- return T.Degrees;
+      else
+	 T.Degrees := (((T.Degrees - 273.15) * (9.0/5.0)) + 32.0);
+	-- return T.Degrees;
+      end if;
+      end if;
+   end GetFahrenheit;
+
+   procedure InputTemp(T : out Temperature; D : in Float; S : in String) is
+   begin
+      T.Scale := S;
+      T.Degrees := D;
+   end InputTemp;
+   
+   procedure PrintTemp(T : in Temperature) is--return String is --(1.. 8) is
+   begin 
+      Put(GetDegrees(T));
+      Put(GetScale(T));
+      --return " ";-- T.Degrees and then " " and then T.Scale and then " ";
+   end PrintTemp;
+   
+   procedure RaiseTemp(T : out Temperature; D : in Float) is
+   begin
+      T.Degrees := T.Degrees + D;
+   end RaiseTemp;
+   
+   procedure LowerTemp(T : out Temperature; D : in Float) is
+   begin
+      T.Degrees := T.Degrees - D;
+   end LowerTemp;
+   
+   function Equals(T : in Temperature; T2 : in Temperature) return Boolean is
+   begin
+      if T.Degrees = T2.Degrees then
+	 return True;
+      else
+	 return False;
+      end if;
+   end Equals;
+   
+   function LessThan(T : in Temperature; T2 : in Temperature) return Boolean is
+   begin
+      if T.Degrees < T2.Degrees then
+	 return True;
+      else
+	 return False;
+      end if;
+   end LessThan;
+end Temperature_Package;
+bda5@augusta:~/214/projects/08/Ada$ cat temperature_package.adb[1P[1P[1P[1P[1P[1P[1P[1@t[1@e[1@s[1@t[1@e[1@r
+
+with Ada.Text_IO; use Ada.Text_IO;
+with Temperature_Package; use Temperature_Package;
+
+procedure Temperature_Tester is
+   --local variables needed declarations here
+   BaseTemp, LimitTemp : Temperature_Package.Temperature;
+   StepValue : Float;
+begin
+   Temperature_Package.Init(BaseTemp, 0.0, "F");
+   Temperature_Package.Init(LimitTemp, 100.0, "C");
+   StepValue := 2.5;
+   
+   while LessThan(BaseTemp, LimitTemp)
+   loop
+      GetCelsius(BaseTemp);
+      --Put(PrintTemp(BaseTemp));
+      PrintTemp(BaseTemp);
+      GetFahrenheit(BaseTemp);
+      --Put(PrintTemp(BaseTemp));
+      PrintTemp(BaseTemp);
+      GetKelvin(BaseTemp);
+      --Put(PrintTemp(BaseTemp));
+      PrintTemp(BaseTemp);
+      RaiseTemp(BaseTemp, StepValue);
+      New_Line;
+   end loop;
+   
+end Temperature_Tester;
+bda5@augusta:~/214/projects/08/Ada$ gcc -c temperature_                   gcc -c temperature_tester.adb
+bda5@augusta:~/214/projects/08/Ada$ gcc -c temperature_package.adb
+temperature_package.adb:77:07: no candidate interpretations match the actuals:
+temperature_package.adb:77:07: missing argument for parameter "Item" in call to "Put" declared at a-textio.ads:241
+temperature_package.adb:77:07: missing argument for parameter "Item" in call to "Put" declared at a-textio.ads:207
+temperature_package.adb:77:07: possible missing instantiation of Text_IO.Float_IO
+temperature_package.adb:77:11: expected type "Standard.String"
+temperature_package.adb:77:11: found type "Standard.Float"
+temperature_package.adb:77:11:   ==> in call to "Put" at a-textio.ads:242
+temperature_package.adb:77:11:   ==> in call to "Put" at a-textio.ads:208
+bda5@augusta:~/214/projects/08/Ada$ gnatbind        exit
+
+Script done on Thu 12 Apr 2018 06:10:58 PM EDT
+Script started on Thu 12 Apr 2018 06:12:13 PM EDT
+bda5@augusta:~/214/projects/08/elisp$ cat Temperature.el
+;; Temperature.el tests temperature type
+;; Bryce Allen
+;; Calvin College
+;; CS 214
+;; 4/10/18
+
+;; Temperature constructs a temperature from two variables, a real and string
+;; receive: degrees and scale
+;; return a list representing the type with degrees and scale
+(defun Temperature(degrees scale)
+  (list degrees scale))
+
+;; getDegrees returns degrees of this temperature
+;; receive theTemp, the temperature we will get degrees
+;; return degrees
+(defun getDegrees(theTemp)
+  (car theTemp))
+
+;; getScale returns scale of this temperature
+;; receive theTemp, the temperature we will get scale
+;; return the scale
+(defun getScale(theTemp)
+  (car (cdr theTemp)))
+
+;; returns a list with new Fahrenheit conversion
+;; receive theTemp, the temperature to be converted to fahrenheit
+;; return a list representing the new temperature
+(defun getFahrenheit(theTemp)
+  (if (= (getScale theTemp) "F") (setq d (getDegrees theTemp)))
+  (if (= (getScale theTemp) "C") (setq d (+ ( * (getDegrees theTemp) (/ 9 5)) 32)))
+  (if (= (getScale theTemp) "K") (setq d (+ (* (- (getDegrees theTemp) 273.15) (/ 9 5)) 32)))
+  (Temperature d "F"))
+
+;; returns a list with new Celsius conversion
+;; receive theTemp, the temperature to be converted to celsius
+;; return a list representing the new temperature
+(defun getCelsius(theTemp)
+  (if (= (getScale theTemp) "C") (setq d (getDegrees theTemp)))
+  (if (= (getScale theTemp) "F") (setq d (* (-(getDegrees theTemp) 32) (/ 5 9))))
+  (if (= (getScale theTemp) "K") (setq d (- (getDegrees theTemp) 273.15)))
+    (Temperature d "C"))
+
+;; returns a list with new Kelvin conversion
+;; receive theTemp, the temperature to be converted to kelvin
+;; return a list representing the new temperature
+(defun getKelvin(theTemp)
+  (if (= (getScale theTemp) "K") (setq d (getDegrees theTemp)))
+  (if (= (getScale theTemp) "C") (setq d (+ (getDegrees theTemp) 273.15)))
+  (if (= (getScale theTemp) "F") (setq d (+ (* (- (getDegrees theTemp) 32) (/ 5 9)) 273.15)))
+    (Temperature d "K"))
+
+(defun printTemp(theTemp)
+  (message "%f %d" (getDegrees theTemp) (getScale theTemp)))
+
+;; raises the temperature by degrees amount
+;; receive theTemp, degrees, the temperature to be raised and the amount to raise by.
+;; return a list representing the new temperature.
+(defun raise(theTemp degrees)
+  (Temperature (+ (getDegrees theTemp) degrees) (getScale theTemp)))
+
+;; lowers the temperature by degrees amount
+;; receive theTemp, degrees, the temperature to be lowered and the amount to lower by.
+;; return a list representing the new temperature.
+(defun lower(theTemp degrees)
+  (Temperature (- (getDegrees theTemp) degrees) (getScale theTemp)))
+
+;; tests if the two temps are equal
+;; receive leftTemp and rightTemp, the two operands.
+;; return true if equal, false otherwise
+(defun equal(leftTemp rightTemp)
+  (= (getDegrees leftTemp) (getDegrees rightTemp)))
+
+;; tests if the two temps are less than eqchother
+;; receive leftTemp and rightTemp, the two operands.
+;; return true if leftTemp is less than rightTemp, false otherwise
+(defun lessThan(leftTemp rightTemp)
+  (< (getDegrees leftTemp) (getDegrees rightTemp)))
+
+(byte-compile-file "Temperature.el")
+
+
+
+bda5@augusta:~/214/projects/08/elisp$ cat temperatureTester. Script.elisp
+;; TemperatureTester.el tests temperature type
+;; Bryce Allen
+;; Calvin College
+;; CS 214
+;; 4/10/18
+
+(setq load-path (cons "/home/bda5/214/projects/08" load-path))
+(load "Temperature.elc")
+
+;; Recursive function to test the Temperature type
+(defun testTemperature(theTemp limitTemp stepVal)
+  (if (lessThan theTemp limitTemp)
+    (setq theTemp (getFahrenheit theTemp))
+    (printTemp theTemp)
+    (setq theTemp (getCelsius theTmep))
+    (printTemp theTemp)
+    (setq theTemp (getKelvin theTemp))
+    (printTemp theTemp)
+    (setq theTemp (raise theTemp stepVal))
+    (testTemperature theTemp limitTemp stepVal)))
+
+
+testTemperature
+
+
+(defun tester()
+  (setq baseTemp (Temperature 0 "F"))
+  (setq limitTemp (Temperature 100 "C"))
+  (testTemperature baseTemp limitTemp 2.5)
+
+  (setq baseTemp1 (Temperature 0 "K"))
+  (setq limitTemp1 (Temperature 212 "F"))
+  (testTemperature baseTemp1 limitTemp1 20.0))
+
+tester
+bda5@augusta:~/214/projects/08/elisp$ exit
+
+Script done on Thu 12 Apr 2018 06:12:41 PM EDT
+Script started on Thu 12 Apr 2018 06:22:45 PM EDT
+bda5@augusta:~/214/projects/08/Ruby$ cat Temperature.rb
+ # Temperature.java represents aggregate type temperature
+ # cs 214
+ # Calvin College
+ # Bryce Allen
+ # 4/6/18
+ 
+module Temperatures
+  class Temperature
+    # inintializes the object
+    # takes in a real and a string
+    # initializes degrees, and scale respectively
+    def initialize(degrees, scale)
+      @degrees, @scale = degrees, scale
+    end
+
+    attr_reader :degrees, :scale
+    
+    # modifies this object to be of celsius
+    # converts the temperature to be celsius
+    # modifies degrees and scale
+    def getCelsius(t)
+      if t.scale =~ /C/
+        @degrees = t.degrees
+      elsif t.scale =~ /F/
+        @degrees = (t.degrees - 32)*(5.0/9.0)
+      else
+        @degrees = (t.degrees - 273.15)
+      end
+      @scale = "C"
+    end
+    
+    # modifies this object to be of Kelvin
+    # converts the temperature to be Kelvin
+    # modifies degrees and scale
+    def getKelvin(t)
+      if t.scale =~ /K/
+        @degrees = t.degrees
+      elsif t.scale =~ /C/
+        @degrees = t.degrees + 273.15
+      else
+        @degrees = ((t.degrees - 32) * (5/9)) + 273.15
+      end
+      @scale = "K"
+    end
+    
+    # modifies this object to be of Fahrenheit
+    # converts the temperature to be Fahrenheit
+    # modifies degrees and scale
+    def getFahrenheit(t)
+      if t.scale =~ /F/
+        @degrees = t.degrees
+      elsif t.scale =~ /K/
+        @degrees = ((t.degrees - 273.15) * (9/5)) + 32
+      else
+        @degrees = (t.degrees * 9/5) + 32
+      end
+      @scale = "F"
+    end
+
+    # modifies the temp to be of the inputted string
+    # converts the 
+    # @param, s, the string representing the new temperature
+    def inputTemperature(s)
+      @scale = s[s.length - 1]
+      @degrees = s[0..s.length - 2].to_f
+    end
+
+    #prints the temperature
+    def printTemp
+      puts @degrees.to_s + " " + @scale
+    end
+    
+    #raises the temperature by a amount
+    #params: t and a, inputed temperature and change respectively
+    def raise(t, a)
+      d = Temperature.new(t.degrees+a, t.scale)
+      return d
+    end
+    
+    #lowers the temperature by a amount
+    #params: t and a, inputed temperature and change respectively
+    def lower(t, a)
+      d = Temperature.new(t.degrees-a, t.scale)
+      return d
+    end
+
+    #tests if the two temperatures are equal
+    #param: t1, the second temperature
+    def equals(t1)
+      return @degrees == t1
+    end
+
+    #tests if this temperature is less than t1
+    #param: t1, the second temperature
+    def lessThan(t1)
+      return @degrees < t1.degrees
+    end
+  end
+end
+bda5@augusta:~/214/projects/08/Ruby$ cat temperatureTester.rv b
+
+require 'test/unit/assertions'
+require "./Temperature.rb"
+include Test::Unit::Assertions
+
+def testTemperature
+  baseTemp = Temperatures::Temperature.new(0.0, "F")
+  limitTemp = Temperatures::Temperature.new(100.0, "C")
+  stepValue = 2.5
+  
+  while baseTemp.lessThan(limitTemp) == true
+    #baseTemp.printTemp
+    baseTemp.getCelsius(baseTemp)
+    baseTemp.printTemp
+    baseTemp.getKelvin(baseTemp)
+    baseTemp.printTemp
+    baseTemp.getFahrenheit(baseTemp)
+    baseTemp.printTemp
+    baseTemp = baseTemp.raise(baseTemp, stepValue)
+    print "\n"
+  end
+
+  baseTemp1 = Temperatures::Temperature.new(0.0, "K")
+  limitTemp1 = Temperatures::Temperature.new(212.0, "F")
+  stepValue1 = 2.5
+  
+  while baseTemp1.lessThan(limitTemp1) == true
+    #baseTemp.printTemp
+    baseTemp1.getCelsius(baseTemp1)
+    baseTemp1.printTemp
+    baseTemp1.getKelvin(baseTemp1)
+    baseTemp1.printTemp
+    baseTemp1.getFahrenheit(baseTemp1)
+    baseTemp1.printTemp
+    baseTemp1 = baseTemp1.raise(baseTemp1, stepValue1)
+    print "\n"
+  end
+end
+
+testTemperature
+bda5@augusta:~/214/projects/08/Ruby$ exit
+
+Script done on Thu 12 Apr 2018 06:23:06 PM EDT

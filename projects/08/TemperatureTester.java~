@@ -1,0 +1,31 @@
+/* TemperatureTester.java tests the module/aggregate type Temperature
+ * cs 214
+ * Calvin College
+ * Bryce Allen
+ * 4/6/18
+ */
+import java.util.Scanner;
+public class TemperatureTester
+{
+    public static void main(String[] args)
+    {
+	Temperature baseTemp = new Temperature(0.0, 'F');
+	System.out.println(baseTemp.getDegrees());
+       	System.out.println(baseTemp.getScale());
+
+	Temperature limitTemp = new Temperature(100.0, 'C');
+	System.out.println(limitTemp.getDegrees());
+	System.out.println(limitTemp.getScale());
+
+	Temperature testTemp = new Temperature(50.0, 'K');
+	System.out.println(testTemp.getDegrees());
+	System.out.println(testTemp.getScale());
+	System.out.println("");
+	System.out.println(baseTemp.getDegrees());
+       	System.out.println(baseTemp.getScale());
+	System.out.println(limitTemp.getDegrees());
+	System.out.println(limitTemp.getScale());
+	System.out.println(testTemp.getDegrees());
+	System.out.println(testTemp.getScale());
+    }
+}

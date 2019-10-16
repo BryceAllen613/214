@@ -1,0 +1,201 @@
+Script started on Tue 20 Feb 2018 04:21:27 PM EST
+bda5@vonneumann:~/214/projects/03$ ls
+letter_grade	   letter_grade.ali   LetterGrade.java~  letter_grade.rb~	 typescript
+letter_grade.adb   LetterGrade.class  letter_grade.o	 script.e-lisp
+letter_grade.adb~  LetterGrade.java   letter_grade.rb	 scriptProject03.e-lisp
+bda5@vonneumann:~/214/projects/03$ jaca  vac -deprecation LetterGrade.java
+bda5@vonneumann:~/214/projects/03$ javca  a letterGrade           LetterGrade
+Enter the grade as a percentage: 
+95
+Letter Grade: A
+bda5@vonneumann:~/214/projects/03$ java le  LetterGrade
+Enter the grade as a percentage: 
+lett    66
+Letter Grade: D
+bda5@vonneumann:~/214/projects/03$ cat LetterGrade.java
+/**
+ *LetterGrade.java
+ *By: Bryce Allen
+ *computes the letter grade given the average grade as an integer
+ *cs-214 Calvin College, 2/16/18
+ */
+
+import java.util.Scanner;
+public class LetterGrade {
+    public static void main(String[] args) {
+	Scanner keyboard = new Scanner(System.in);
+	System.out.println("Enter the grade as a percentage: ");
+	int grade = keyboard.nextInt();
+	System.out.println("Letter Grade: " + letterGrade(grade));
+    }
+
+    public static char letterGrade(int average){
+	switch(average/10){
+	case 10: return 'A';
+	case 9: return 'A';
+	case 8: return 'B';
+	case 7: return 'C';
+	case 6: return 'D';
+	default: return 'F';
+	}
+    }
+}
+bda5@vonneumann:~/214/projects/03$ ./letter_grad             gnatmake letter_grade.adb
+gcc-5 -c letter_grade.adb
+gnatbind-5 -x letter_grade.ali
+gnatlink-5 letter_grade.ali
+bda5@vonneumann:~/214/projects/03$ ./letter_grade.adb
+bash: ./letter_grade.adb: Permission denied
+bda5@vonneumann:~/214/projects/03$ ./letterG _grade
+Enter percentage grade: 
+88
+Letter grade:  F 
+bda5@vonneumann:~/214/projects/03$ ./letter_grade
+Enter percentage grade: 
+90
+Letter grade:  A 
+bda5@vonneumann:~/214/projects/03$ ./letter_grr ade
+Enter percentage grade: 
+80
+Letter grade:  B 
+bda5@vonneumann:~/214/projects/03$ ./letter_grade
+Enter percentage grade: 
+60
+Letter grade:  D 
+bda5@vonneumann:~/214/projects/03$ cat letter_grade.adb
+-- letter_grade.adb computes letter grade when given percentage
+-- input: integer representing the exact grade for a given student
+-- precondition: 0<= input <=100
+-- output: char representing the letter grade (A, B, C, D, F)
+-- by:Bryce Allen
+-- cs-214 Calvin College 2/16/18
+-----------------------------------------------------------------------
+with Ada.Text_IO, Ada.Integer_Text_IO;
+use  Ada.Text_IO, Ada.Integer_Text_IO;
+
+procedure letter_grade is
+   Grade: Integer;
+   LGrade: STRING(1.. 3);
+   function letterGrade(G: in Integer) return STRING is
+   begin
+      case G is
+	 when 100 => return " A ";
+	 when 90 => return " A ";
+	 when 80 => return " B ";
+	 when 70 => return " C ";
+	 when 60 => return " D ";
+	 when others => return " F ";
+      end case;
+     
+   end letterGrade;
+     
+begin
+     Put_Line("Enter percentage grade: ");
+     Get(Grade);
+     -- Grade := 90;
+     LGrade := LetterGrade(Grade);
+     Put("Letter grade: ");
+     Put(LGrade);
+end letter_grade;
+bda5@vonneumann:~/214/projects/03$ cat letter      script.e-lisp
+;; This buffer is for notes you don't want to save, and for Lisp evaluation.
+;; If you want to create a file, visit that file with C-x C-f,
+;; then enter the text in that file's own buffer.
+
+
+;;; letter_grade.el computes the letter grade when given a percentage grade
+;;; input: grade as an integer representing a percentage
+;;; precondition: 100 >= input >= 0
+;;; output: letter representing grade (a,b,c,d or f)
+;;; written by: Bryce Allen for cs-214 at Calvin College
+;;; date: 2/17/18
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun letterGrade (grade)
+  (cond ((= (/ grade 10) 10) "A")
+	((= (/ grade 10) 9) "A")
+	((= (/ grade 10) 8) "B")
+	((= (/ grade 10) 7) "C")
+	((= (/ grade 10) 6) "D")
+	("F")))
+
+
+letterGrade
+(letterGrade 100)
+
+"A"
+
+(letterGrade 90)
+
+"A"
+
+(letterGrade 80)
+
+"B"
+
+(letterGrade 70)
+
+"C"
+
+(letterGrade 60)
+
+"D"
+
+(letterGrade 50)
+
+"F"
+
+
+
+(defun letter_grade (g)
+    (interactive "nEnter the student's numeric grade: ")
+    (setq lgrade (letterGrade g))
+    (message "Letter Grade is %f" lgrade))
+
+letter_grade
+
+
+
+
+
+
+
+bda5@vonneumann:~/214/projects/03$ c ruby letter_grade.rb
+Enter percentage: 50  55
+Letter Grade is: F
+bda5@vonneumann:~/214/projects/03$ cat letter_grade.rb
+#letter_grade.rb
+#
+#input: integer representing grade percentage
+#precondition: input is an integer between 0 and 100
+#output: a letter grade.
+#
+#completed by: Bryce Allen 
+#cs 214, Calvin College
+#2/20/18
+#########################################################################
+
+def letterGrade(g)
+  case g
+  when 90..100
+    return 'A'
+  when 80..89
+    return 'B'
+  when 70..79
+    return 'C'
+  when 60..69
+    return 'D'
+  else return 'F'
+  end
+end
+
+
+if __FILE__ == $0
+  print "Enter percentage: "
+  g = gets
+  print "Letter Grade is: "
+  puts letterGrade(g)
+end
+bda5@vonneumann:~/214/projects/03$ exit
+
+Script done on Tue 20 Feb 2018 04:25:19 PM EST

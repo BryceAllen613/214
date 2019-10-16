@@ -1,0 +1,72 @@
+V "GNAT Lib v5"
+M P W=b
+A -gnata
+P SS ZX
+
+RN
+RV NO_IO
+RV NO_SECONDARY_STACK
+RV SPARK_05
+
+U name_tester%b		name_tester.adb		3d706fa7 NE OO SU IL
+W ada%s			ada.ads			ada.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W system.assertions%s	s-assert.adb		s-assert.ali
+W system.concat_3%s	s-conca3.adb		s-conca3.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+
+D ada.ads		20070406091342 3ffc8e18 ada%s
+D a-except.ads		20140730140058 5250cb69 ada.exceptions%s
+D a-ioexce.ads		20140225151544 e4a01f64 ada.io_exceptions%s
+D a-stream.ads		20141120112812 119b8fb3 ada.streams%s
+D a-tags.ads		20140730140058 dc4d0634 ada.tags%s
+D a-textio.ads		20140717063745 386df5d4 ada.text_io%s
+D a-unccon.ads		20070406091342 f9eb8f06 ada.unchecked_conversion%s
+D interfac.ads		20141120112812 6033a23f interfaces%s
+D i-cstrea.ads		20140801100435 e53d8b8e interfaces.c_streams%s
+D name_tester.adb	20180328202719 051d9a73 name_tester%b
+D system.ads		20141031112219 1d274481 system%s
+D s-assert.ads		20140225151544 cd8d2c94 system.assertions%s
+D s-conca3.ads		20140225151544 0b705ca5 system.concat_3%s
+D s-crtl.ads		20141120112812 0ebbdb71 system.crtl%s
+D s-exctab.ads		20140225151139 54135002 system.exception_table%s
+D s-ficobl.ads		20140718105747 078245e4 system.file_control_block%s
+D s-parame.ads		20140801093848 7e2a0d7f system.parameters%s
+D s-secsta.ads		20140225151139 86a2856d system.secondary_stack%s
+D s-soflin.ads		20140801100131 aa763b52 system.soft_links%s
+D s-stache.ads		20140225151139 a37c21ec system.stack_checking%s
+D s-stalib.ads		20150220094550 fa0a3617 system.standard_library%s
+D s-stoele.ads		20140225151139 2dc34a04 system.storage_elements%s
+D s-traent.ads		20140730135025 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20140731130224 9d58a4c0 system.unsigned_types%s
+D s-wchcon.ads		20140718092328 1b7d22d2 system.wch_con%s
+X 1 ada.ads
+16K9*Ada 19e8 10|7r6 7r23
+X 6 a-textio.ads
+49K13*Text_IO 471e16 10|7w10 7r27
+166U14*New_Line 10|104s16 105s30
+242U14*Put 10|92s4 105s4
+X 10 name_tester.adb
+9U11*name_tester 9b11 107l5 107t16
+11i3 NAME_SIZE{integer} 15r47
+13R8 Name 16e16 18r11 30r34 44r33 55r34 66r32 78r35 90r28
+15a9 MyFirst{string} 32m13 46r19 80r19
+15a18 MyMiddle{string} 33m13 57r19 80r37
+15a28 MyLast{string} 34m13 68r19 80r56
+18r3 aName{13R8} 96m9 98r28 99r29 100r27 101r31 104r8
+30U14 Init 30b14 30<20 30>40 30>47 30>55 35l5 35t9 96s4
+30r20 TheName{13R8} 32m5 33m5 34m5
+30a40 First{string} 32r24
+30a47 Middle{string} 33r25
+30a55 Last{string} 34r23
+44V10 GetFirst{string} 44b10 44>20 47l5 47t13 98s19
+44r20 TheName{13R8} 46r11
+55V10 GetMiddle{string} 55b10 55>21 58l5 58t14 99s19
+55r21 TheName{13R8} 57r11
+66V10 GetLast{string} 66b10 66>19 69l5 69t12 100s19
+66r19 TheName{13R8} 68r11
+78V10 GetFullName{string} 78b10 78>22 81l5 81t16 92s8 101s19
+78r22 TheName{13R8} 80r11 80r29 80r48
+90U11 Put 90b11 90>15 93l5 93t8 104s4
+90r15 TheName{13R8} 92r20
+

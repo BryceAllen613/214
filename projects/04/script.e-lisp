@@ -1,0 +1,33 @@
+;; This buffer is for notes you don't want to save, and for Lisp evaluation.
+;; If you want to create a file, visit that file with C-x C-f,
+;; then enter the text in that file's own buffer.
+
+;;;compute_factorial.el
+;;;Computes Factorialization of given number
+;;;2/24/18
+;;;by: Bryce Allen
+;;;cs 214 at Calvin College
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun computeFactorial (n)
+  (cond ((> n 1) (* n (computeFactorial (- n 1))))
+	((= n 1) 1)
+	(1)))
+
+computeFactorial
+(computeFactorial 5)
+
+120
+
+
+(defun main(num)
+  (interactive "nEnter a number: ")
+    (setq number (computeFactorial num))
+    (message "Factorialization is %f" number))
+
+
+main
+(main 5)
+
+"Factorialization is 120.000000"
+

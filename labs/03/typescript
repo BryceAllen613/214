@@ -1,0 +1,201 @@
+Script started on Thu 15 Feb 2018 07:51:26 PM EST
+bda5@chomsky:~/214/labs/03$ Year    cat YearCodes.java
+/* YearCodes.java is a driver for function yearCode().
+ *
+ * Begun by: Prof. Adams, for CS 214 at Calvin College.
+ ****************************************************************/
+
+import java.util.Scanner;
+
+public class YearCodes {
+
+   public static void main(String[] args) {
+      Scanner keyboard = new Scanner(System.in);
+      System.out.println("\nEnter your academic year: "); // prompt
+
+      String year = keyboard.next();       // read year
+      System.out.println(yearCode(year)); // display its code
+   }
+
+   /***************************************************************
+    * yearCode() converts an academic year into its integer code.
+    *
+    * Receive: year, a string.
+    * PRE: year is one of {freshman, sophomore, junior, or senior}.
+    * Return: the integer code corresponding to year.
+    */
+
+   public static int yearCode(String year)
+   {
+       if( year.equals("freshman") )
+	   return 1;
+       else if( year.equals("sophomore") )
+	   return 2;
+       else if( year.equals("junior") )
+	   return 3;
+       else if( year.equals("senior") )
+	   return 4;
+       else
+	   return 0;
+   }
+}
+bda5@chomsky:~/214/labs/03$ d javac deprec      -deprecation year    YearCodes.java
+bda5@chomsky:~/214/labs/03$ java YearCodes
+
+Enter your academic year: 
+freshman
+1
+bda5@chomsky:~/214/labs/03$ J java YearCodes
+
+Enter your academic year: 
+sophomore
+2
+bda5@chomsky:~/214/labs/03$ java YearCodes
+
+Enter your academic year: 
+junior
+3
+bda5@chomsky:~/214/labs/03$ java YearCodes
+
+Enter your academic year: 
+senior
+4
+bda5@chomsky:~/214/labs/03$ java Year  Codes
+
+Enter your academic year: 
+foo
+0
+bda5@chomsky:~/214/labs/03$ cat year    year_codes.adb
+-- year_codes.adb converts academic year codes to corresponding years.
+--
+-- Begun by: Dr. Adams, for CS 214 at Calvin College.
+-- completed by: Bryce Allen
+-- Input: year, a string
+-- Precondition: year is one of "freshman", "sophomore", "junior", "senior"
+-- Output: The year code (1, 2, 3 or 4) corresponding to year.
+----------------------------------------------------
+
+with Ada.Text_IO, Ada.Integer_Text_IO;
+use  Ada.Text_IO, Ada.Integer_Text_IO;
+
+procedure year_codes is
+
+   year : String(1..9) := "         ";
+   charsRead : Natural;
+   
+   function yearCode(Y: in String) return integer is
+   begin
+      if Y = "freshman " then
+	 return 1;
+      elsif( Y = "sophomore" )then
+	 return 2;
+      elsif( Y = "junior   " )then
+	 return 3;
+      elsif( Y = "senior   " )then
+	 return 4;
+      else 
+	 return 0;
+      end if;
+   end yearCode;
+     
+   
+begin                                          
+   Put("Enter your academic year: ");           -- Prompt for input
+   Get_Line(year, charsRead);                   -- Input
+   Put( yearCode(year) );                       -- Convert and output
+   New_Line;
+end year_codes;
+
+bda5@chomsky:~/214/labs/03$ gcc -c c year_codes.adb
+bda5@chomsky:~/214/labs/03$ ./yearC _codes
+Enter your academic year: freshman
+          1
+bda5@chomsky:~/214/labs/03$ ./year_codes
+Enter your academic year: sophomore
+          2
+bda5@chomsky:~/214/labs/03$ ./year_codes
+Enter your academic year: junior
+          3
+bda5@chomsky:~/214/labs/03$ ./senior      year_codes
+Enter your academic year: senior
+          4
+bda5@chomsky:~/214/labs/03$ ./year_codes
+Enter your academic year: foo
+          0
+bda5@chomsky:~/214/labs/03$ cat scriptLab03.e-lisp
+;;; year_codes.el is a driver for function yearcode.
+;;; begun by: dr. adams, for cs 214 at calvin college.
+;;; completed by: bryce allen for cs 214 at calvin colelge
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; yearcode returns the code for a given academic year.                 ;;;
+;;; receive: year, a string.                                             ;;;
+;;; precondition: year is one of {freshman, sophomore, junior or senior}.;;;
+;;; return: the integer code corresponding to year.                      ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun yearcode (year)
+  (if (equal year "freshman") (1)
+  (else (if (equal year "sophomore") (2)
+  (else (if (equal year "junior") (3)
+  (else (if (equal year "senior") (4)
+	  (else (0))))))))))
+
+yearcode
+(yearcode "freshman")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; main function                        ;;;
+;;; input: year                          ;;;
+;;; output: code corresponding to year   ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun main (year)
+ (interactive "senter your academic year: ")  ; read year
+ (message "%d" (yearcode year)))              ; display its code
+
+bda5@chomsky:~/214/labs/03$ cat year_codes.rb
+#! /usr/bin/ruby
+# year_codes.rb translates an academic year into a numeric code
+# Begun by: Dr. Nelesen, for CS 214 at Calvin College
+# completed by Bryce Allen
+################################################################
+
+# Input:  The name of an academic year
+# Precondition: The academic year is a string with a value of freshman, 
+#   sophomore, junior or senior
+# Output: The corresponding integer code for the given academic year
+
+def yearCode(year) 
+  if year =~ /freshman/ then return 1
+  elsif year =~ /sophomore/ then return 2
+  elsif year =~ /junior/ then return 3
+  elsif year =~ /senior/ then return 4
+  else return 0
+  end
+end
+
+if __FILE__ == $0
+   print "Enter the year: "
+   year = gets
+   print "Numeric code is: "
+   puts yearCode(year)
+end
+
+bda5@chomsky:~/214/labs/03$ ruby year_codes.rb
+Enter the year: freshman
+Numeric code is: 1
+bda5@chomsky:~/214/labs/03$ ruby year_codes.rb
+Enter the year: j sophomore
+Numeric code is: 2
+bda5@chomsky:~/214/labs/03$ ruby year_codes.rb
+Enter the year: junior
+Numeric code is: 3
+bda5@chomsky:~/214/labs/03$ ruby year_codes.rb
+Enter the year: senior
+Numeric code is: 4
+bda5@chomsky:~/214/labs/03$ ruby year_codes.rb
+Enter the year: foo
+Numeric code is: 0
+bda5@chomsky:~/214/labs/03$ exit
+
+Script done on Thu 15 Feb 2018 07:56:51 PM EST

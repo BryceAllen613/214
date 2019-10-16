@@ -1,0 +1,221 @@
+Script started on Tue 06 Mar 2018 03:02:45 PM EST
+bda5@wall:~/214/projects/05$ ls
+QuadraticFormaula.java~  quadratic_formula.el	 quadratic_formula.rb~
+quadratic_formula	 quadratic_formula.el~	 script.ada
+quadratic_formula.adb	 QuadraticFormula.java	 script.e-lisp
+quadratic_formula.adb~	 QuadraticFormula.java~  script.Java
+quadratic_formula.ali	 quadratic_formula.o	 script.ruby
+QuadraticFormula.class	 quadratic_formula.rb	 typescript
+bda5@wall:~/214/projects/05$ cat script.j Jaca  va
+Script started on Fri 02 Mar 2018 10:23:30 AM EST
+bda5@hollerith:~/214/projects/05$ sc  cat Quadtr  raticFormula.jaca  va
+/* QuadraticFormula computes the roots of a quadratic expression
+ * cs 214 Calvin College
+ * Completed by: Bryce Allen
+ * 3/2/18
+ *
+ */
+import java.util.Scanner;
+
+public class QuadraticFormula
+{
+    private static double root1;
+    private static double root2;
+    
+    public static void main(String[] args)
+    {
+	Scanner keyboard = new Scanner(System.in);
+	
+	System.out.println("Enter the A B and C values");
+	double a = keyboard.nextDouble();
+	double b = keyboard.nextDouble();
+	double c = keyboard.nextDouble();
+
+        root1 = 0.0;
+        root2 = 0.0;
+
+	if( quadraticFormula(a,b,c) )
+	    {
+		System.out.println("Root one " + root1);
+		System.out.println("Root two " + root2);
+	    }
+	else{ System.out.println("Not valid input"); }
+    }
+
+    public static boolean quadraticFormula(double a, double b, double c)
+    {
+	if( a == 0 )
+	    return false;
+	
+	double test = (Math.pow(b, 2.0)-(4*a*c));
+	if( test < 0 )
+	    return false;
+
+	root1 = ((-b + (Math.sqrt(test)))/(2*a));
+	root2 = ((-b - (Math.sqrt(test)))/(2*a));
+
+	return true;
+    }
+}
+		       
+bda5@hollerith:~/214/projects/05$ javac -deprecation Quadrac ticFormula.java
+bda5@hollerith:~/214/projects/05$ Quad    J java QuadraticForu mula. 
+Enter the A B and C values
+1
+1
+0
+Root one 0.0
+Root two -1.0
+bda5@hollerith:~/214/projects/05$ exit
+
+Script done on Fri 02 Mar 2018 10:24:34 AM EST
+bda5@wall:~/214/projects/05$ cat script.ada
+Script started on Fri 02 Mar 2018 11:15:19 AM EST
+bda5@hollerith:~/214/projects/05$ cat quadratic_formula.ada   adb
+--quadratic_formula.ada computes the roots of a quadratic equation given the
+--coefficents
+--by: Bryce Allen
+--cs 214 Calvin College
+--3/2/18
+---------------------------------------------------------------------------
+
+with Ada.Text_IO, Ada.Float_Text_IO, Ada.Numerics.Elementary_Functions;
+use  Ada.Text_IO, Ada.Float_Text_IO, Ada.Numerics.Elementary_Functions;
+procedure Quadratic_Formula is
+   
+   Root1, Root2, Aval, Bval, Cval, Test : Float;
+   
+   function quadraticFormula(A: in Float; B: in Float; C: in Float) return Boolean is
+   begin
+     Test := ((B ** 2) - (4.0 * A * C));
+     if A = 0.0 then
+       return False;
+     elsif (Test < 0.0)then
+       return False;
+     else
+	Root1 := ((-B + (Sqrt(Test)))/(2.0 * A));
+	Root2 := ((-B - (Sqrt(Test)))/(2.0 * A));
+	return True;
+     end if;
+   end quadraticFormula;
+
+begin
+   Put_Line("Enter a b and c values: ");
+   Get(Aval);
+   Get(Bval);
+   Get(Cval);
+   if QuadraticFormula(Aval, Bval, Cval) = True then
+      Put("root one: ");
+      Put(Root1);
+      Put(" root two: ");
+      Put(Root2);
+   else
+      Put("invalid input!");
+   end if;
+      
+end Quadratic_Formula;
+  
+bda5@hollerith:~/214/projects/05$ cat quadratic             gnatmake quadratic_formm ula.adb
+gcc-5 -c quadratic_formula.adb
+gnatbind-5 -x quadratic_formula.ali
+gnatlink-5 quadratic_formula.ali
+bda5@hollerith:~/214/projects/05$ ./  gnatmake quadratic_formula.adb[1P[1P[1P[1P[1P[1P[1P[1P[1P[1@.[1@/
+bash: ./quadratic_formula.adb: Permission denied
+bda5@hollerith:~/214/projects/05$ ./quadratic_formula.adb    
+Enter a b and c values: 
+1
+1
+0
+root one:  0.00000E+00 root two: -1.00000E+00
+bda5@hollerith:~/214/projects/05$ exit
+
+Script done on Fri 02 Mar 2018 11:16:53 AM EST
+bda5@wall:~/214/projects/05$ cat script.e-lisp
+;;quadratic_formula.el computes a quadratic roots given coefficents
+;;
+;;by: Bryce Allen
+;;3/5/17
+;;cs 214
+;;Calvin College
+;;;;;;;;;;;;;;;;
+(defun quadraticFormula(a b c)
+  (setq var1(sqrt (- (expt b 2) (* (* 4 a) c))))
+  (setq root1 (/ (+ (* b -1) var1) (* 2 a)))
+  (setq root2 (/ (- (* b -1) var1) (* 2 a)))
+  (cond ((= a 0) "invalid input.")
+	((< var1 0) "invalid input")
+	("valid input"))
+  (message "Roots are %f and %f" root1 root2))
+
+
+quadraticFormula
+(quadraticFormula 1 1 0)
+"Roots are 0.000000 and -1.000000"
+
+
+(defun quadratic_formula (a b c)
+    (interactive "nEnter the a b and c coefficents: ")
+    (quadraticFormula a b c))
+
+quadratic_formula
+(quadratic_formula 1 1 0)
+
+"Roots are 0.000000 and -1.000000"
+
+
+
+
+
+
+
+
+
+
+
+
+bda5@wall:~/214/projects/05$ cat script.ruby
+Script started on Mon 05 Mar 2018 04:48:47 PM EST
+bda5@hoare:~/214/projects/05$ cat quadratic_formula.rb
+# quadratic_formula.rb computes quadratic formula given a b c values
+#
+# 3/5/18
+# Bryce Allen
+# cs 214
+# Calvin College
+
+root1 = 0.0
+root2 = 0.0
+def quadratic_formula(a, b, c)
+  if a == 0
+    print "invalid input"
+  elsif ((b ** 2) - (4 * a * c)) < 0
+    print "invalid input"
+  else
+    print "The roots are: "
+    root1 = ((-b + Math.sqrt(((b ** 2) - (4 * a * c))))/(2 * a))
+    print root1
+    print " and "
+    root2 = ((-b - Math.sqrt(((b ** 2) - (4 * a * c))))/(2 * a))
+    print root2
+    print " "
+  end
+end
+
+
+if __FILE__ == $0
+  print "enter a b and c:"
+  a = gets
+  b = gets
+  c = gets
+  quadratic_formula(a.to_i, b.to_i, c.to_i)
+end
+bda5@hoare:~/214/projects/05$ ruby quadrat            cat quadratic_formula.rbls[Kscript script.ada[2@./quadratic_formulagnatmake quadratic_formula.adb[11P./quadratic_formula[2Pscript script.adals[Kcat quadratic_formula.rb[Kruby quadratic_formula.rb
+enter a b and c:1
+1
+0
+The roots are: 0.0 and -1.0 bda5@hoare:~/214/projects/05$ exit
+
+Script done on Mon 05 Mar 2018 04:49:45 PM EST
+bda5@wall:~/214/projects/05$ exit
+
+Script done on Tue 06 Mar 2018 03:03:29 PM EST

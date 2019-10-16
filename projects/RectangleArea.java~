@@ -1,0 +1,22 @@
+/*Bryce Allen
+ *project 01
+ *2/2/18
+ *cs-214
+ */
+import java.util.Scanner;
+
+public class RectangleArea{
+    public static double rectangleArea(double l, double w){
+	return l*w;
+    }
+
+    public static void main(String[] args){
+	Scanner Keyboard = new Scanner(System.in);
+	System.out.println("Enter the length:");
+	double length = keyboard.nextDouble();
+	System.out.println("Enter the width:");
+	double width = keyboard.nextDouble();
+	double result = rectangleArea(lenght,width);
+	System.out.println("The area of the rectangle is: " + result);
+    }
+}

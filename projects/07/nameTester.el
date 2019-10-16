@@ -1,0 +1,144 @@
+;;; nameTester.el simulates and tests an e-LISP Name type.
+;;; Begun by: Dr. Adams, CS 214 at Calvin College.
+;;; Completed by: Bryce Allen
+;;; Date: 4/4/18
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Name constructs a name from three strings.      ;;
+;;; Receive: first, middle and last, three strings. ;;
+;;; Return: the triplet (first middle last).        ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun Name (first middle last)
+  (list first middle last))
+
+Name
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; getFirst extracts the first name of a name object.;
+;;; Receive: theName, a Name.                       
+;;; Return: the first string in theName.           
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun getFirst (theName)
+  (car theName))
+
+getFirst
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; getMiddle extracts the middle name of a name object.
+;;; Receive: theName, a Name.                      
+;;; Return: the second string in theName.           
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun getMiddle (theName)
+  (car (cdr theName)))
+
+getMiddle
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; getLast extracts the last name of a name object.
+;;; Receive: theName, a Name.                    
+;;; Return: the third string in theName.       
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun getLast (theName)
+  (car (cdr (cdr theName))))
+
+getLast
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; getFullName returns a full name in F-M-L order. 
+;;; Return: myFirst, myMiddle, myLast.           
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun getFullName (theName)
+  (concat (getFirst theName) " " (getMiddle theName) " " (getLast theName)))
+
+getFullName
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; printName displays a name object.         
+;;; Receive: theName, a Name,                 
+;;;          buffer, the name of a buffer.   
+;;; Output: the strings in theName to buffer. ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun printName (theName buffer)
+  (princ (concat (getFirst theName)
+		   " " (getMiddle theName)
+		   " " (getLast theName)) buffer) theName)
+
+printName
+
+;;sets the first name to f
+;;recieve: f, the new name
+(defun setFirst (theName f)
+  (setcar theName f))
+
+setFirst
+
+;;sets the middle name to m
+;;recieve: m, the new middle name
+(defun setMiddle (theName m)
+  (setcar (cdr theName) m))
+
+setMiddle
+
+;;sets the last name to l
+;;recieve: l, the new last name
+(defun setLast (theName l)
+  (setcar (cdr (cdr theName)) l))
+
+setLast
+
+;;returns the name in last, first, middle initial order
+;;recieves, theName, the name list
+;;prints the names in last, first, middleInitial format
+(defun lfmi (theName)
+  (concat (getLast theName)
+	  " " (getFirst theName)
+	  " " (subseq (getMiddle theName) 0 1)))
+
+lfmi
+
+;;prompts user to input all new names for the list
+;;recieve: theName, the Name list
+(defun read (theName)
+  (setq f (interactive "nEnter a new first name: "))
+  (setFirst theName f)
+  (setq m (interactive "nEnter a new middle name: "))
+  (setMiddle theName m)
+  (setq l (interactive "nEnter a new last name: "))
+  (setLast theName l))
+
+read
+  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; A simple driver for our Name functions. ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(progn
+  (require 'cl)                              ; assert
+  (setq aName (Name "John" "Paul" "Jones"))  ; build a Name
+
+  (assert (equal (getFirst aName) "John" ))  ; test it
+  (assert (equal (getMiddle aName) "Paul" ))
+  (assert (equal (getLast aName) "Jones" ))
+  (assert (equal (getFullName aName) "John Paul Jones" ))
+
+  (setq buf (get-buffer "nameTester.el"))    ; buf = this buffer
+  (assert (eq (printName aName buf) aName) ) ; output
+  (terpri buf)                               ; newline
+
+  (read aName)
+  (assert (/= (getFirst aName) "John"))
+  (assert (/= (getMiddle aName) "Paul"))
+  (assert (/= (getLast aName) "Jones"))
+
+  (setFirst aName "John")
+  (setMiddle aName "Paul")
+  (setLast aName "Jones")
+  (assert (equal (getFirst aName) "John" ))  ; test it
+  (assert (equal (getMiddle aName) "Paul" ))
+  (assert (equal (getLast aName) "Jones" ))
+  (assert (equal (getFullName aName) "John Paul Jones" ))
+
+  (assert (equal (lfmi aName) "Jones John P"))
+  
+  (princ "All tests passed!" buf)            ; feedback
+  (terpri buf))

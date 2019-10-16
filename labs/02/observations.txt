@@ -1,0 +1,17 @@
+EXAMPLE 1:
+between lines 740-770 there are predefined cases and switch statments for the
+the key phrases 'start' and 'stop'
+
+EXAMPLE 2:
+input:     output:
+start ---->WORD
+stop  ---->WORD
+I'm 20 --->WORD'WORD NUMBER
+I_am_20 -->WORD_WORD_NUMBER (when a non-specified character is entered, the
+				program just prints the character)
+
+EXAMPLE 4:
+The difference between terminal and non terminal is whether it is a token to
+be returned and printed to the termainal. Non terminals (such as heat_switch)
+will be parsed further.
+
